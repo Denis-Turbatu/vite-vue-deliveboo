@@ -3,11 +3,13 @@ import axios from "axios";
 import { store } from "../store.js";
 import AppCard from "../components/AppCard.vue";
 import AppTypology from "../components/AppTypology.vue";
+import AppHeader from "../components/AppHeader.vue";
 
 export default {
   components: {
     AppCard,
     AppTypology,
+    AppHeader
   },
   data() {
     return {
@@ -69,6 +71,9 @@ export default {
 </script>
 
 <template>
+
+  <AppHeader />
+
   <div class="container">
     <h4>Scegli i tuoi piatti preferiti:</h4>
     <div class="row">
