@@ -24,26 +24,21 @@
                 });
             },
             getRestaurants() {
-                axios.get("http://localhost:8000/api/restaurants/", { params: { typology_id: this.typology_id } }).then((resp) => {
+                axios.get("http://localhost:8000/api/restaurants/", { params: { typology_id: this.typology_id, search: store.searchQuery} }).then((resp) => {
                     // console.log(resp.data.results.data);
                     this.store.restaurantsArray = resp.data.results;
                 });
             },
-            filterRestaurants() {
-                const filteredRestaurants = this.store.restaurantsArray.filter((restaurant) => {
-                    return restaurant.business_name
-                        .toLowerCase()
-                        .includes(this.query.toLowerCase());
-                });
-
-                console.log("rist. filt.:", filteredRestaurants);
-            },
             searchAction() {
-                this.store.searchQuery = this.query;
-                this.filterRestaurants();
+                if(this.searchQuery == ''){
+                    this.getRestaurants();
+                }else{
+                    this.store.searchQuery = this.query;
+                    this.getRestaurants();
+                }
             },
 
-            FilterRestaurants(id) {
+            filterRestaurants(id) {
                 if (this.isTypology == false && this.typology_id !== id) {
                     this.typology_id = id;
                     this.isTypology = true;
@@ -72,7 +67,7 @@
         <div class="content">
             <div class="row">
                 <div v-for="typology in filters" class="card col-3">
-                    <div class="card-body" @click="FilterRestaurants(typology.id)">
+                    <div class="card-body" @click="filterRestaurants(typology.id)">
                         <span>{{ typology.name }}</span>
                     </div>
                 </div>
@@ -80,7 +75,7 @@
         </div>
 
         <label for="search">Ricerca</label>
-        <input type="text" id="search" name="search" v-model="query" />
+        <input type="text" id="search" name="search" @keyup.enter="searchAction()" v-model="query" />
         <button @click="searchAction()">Cerca</button>
 
         <div>
