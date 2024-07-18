@@ -12,7 +12,8 @@
                 filters: [],
                 query: "",
                 store,
-                // typology_id: "",
+                typology_id: "",
+                isTypology: false,
             };
         },
         methods: {
@@ -23,9 +24,9 @@
                 });
             },
             getRestaurants() {
-                axios.get("http://localhost:8000/api/restaurants/").then((resp) => {
+                axios.get("http://localhost:8000/api/restaurants/", {params: {typology_id: this.typology_id}}).then((resp) => {
                     // console.log(resp.data.results.data);
-                    this.store.restaurantsArray = resp.data.results.data;
+                    this.store.restaurantsArray = resp.data.results;
                 });
             },
             filterRestaurants() {
@@ -41,12 +42,23 @@
                 this.store.searchQuery = this.query;
                 this.filterRestaurants();
             },
-            // storeFilter(id){
-            //     this.typology_id = id;
-            // },
+
+            FilterRestaurants(id){
+                this.isTypology = !this.isTypology;
+                console.log(this.isTypology);
+
+                if(this.isTypology == true){
+                    this.typology_id = id;
+                }else{
+                    this.typology_id = '';
+                }
+                
+                console.log(this.typology_id);
+                this.getRestaurants();
+            },
             // searchFilter(){
             //     axios.get("http://localhost:8000/api/restaurants/", {params: {typology_id: this.typology_id}}).then((resp) => {
-            //         console.log(resp.data.results.data);
+            //         console.log('ristoraint filtrati', resp);
             //         // this.store.restaurantsArray = resp.data.results.data;
             //     });
             // }
@@ -65,8 +77,8 @@
         <div class="content">
             <div class="row">
                 <div v-for="typology in filters" class="card col-3">
-                    <div class="card-body" @click="storeFilter(typology.id)">
-                        {{ typology.name }}
+                    <div class="card-body" @click="FilterRestaurants(typology.id)">
+                        <span>{{ typology.name }}</span>
                     </div>
                 </div>
             </div>
@@ -79,7 +91,7 @@
         <div>
             <div class="content">
             <div class="row">
-                <div class="col" v-for="restObj in store.restaurantsArray">
+                <div class="col-4" v-for="restObj in store.restaurantsArray">
                     <AppCard :restaurantObject="restObj"/>
                 </div>
             </div>
