@@ -53,6 +53,6 @@
 }
 .badge-primary {
     color: #fff;
-    background-color: rgb(25 135 84);
+    background-color:#ffc107;
 }
 </style>
