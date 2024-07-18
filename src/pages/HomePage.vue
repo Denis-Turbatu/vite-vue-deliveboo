@@ -24,7 +24,7 @@
                 });
             },
             getRestaurants() {
-                axios.get("http://localhost:8000/api/restaurants/", {params: {typology_id: this.typology_id}}).then((resp) => {
+                axios.get("http://localhost:8000/api/restaurants/", { params: { typology_id: this.typology_id } }).then((resp) => {
                     // console.log(resp.data.results.data);
                     this.store.restaurantsArray = resp.data.results;
                 });
@@ -35,33 +35,28 @@
                         .toLowerCase()
                         .includes(this.query.toLowerCase());
                 });
-                
-                console.log("Filtered restaurants:", filteredRestaurants);
+
+                console.log("rist. filt.:", filteredRestaurants);
             },
             searchAction() {
                 this.store.searchQuery = this.query;
                 this.filterRestaurants();
             },
 
-            FilterRestaurants(id){
-                this.isTypology = !this.isTypology;
-                console.log(this.isTypology);
-
-                if(this.isTypology == true){
+            FilterRestaurants(id) {
+                if (this.isTypology == false && this.typology_id !== id) {
                     this.typology_id = id;
-                }else{
+                    this.isTypology = true;
+                } else if (this.isTypology == true && this.typology_id === id) {
                     this.typology_id = '';
+                } else if (this.isTypology == true && this.typology_id !== id) {
+                    this.typology_id = id;
                 }
-                
+
                 console.log(this.typology_id);
+                console.log(this.isTypology);
                 this.getRestaurants();
-            },
-            // searchFilter(){
-            //     axios.get("http://localhost:8000/api/restaurants/", {params: {typology_id: this.typology_id}}).then((resp) => {
-            //         console.log('ristoraint filtrati', resp);
-            //         // this.store.restaurantsArray = resp.data.results.data;
-            //     });
-            // }
+            }
         },
         created() {
             this.getFilters();
@@ -90,12 +85,12 @@
 
         <div>
             <div class="content">
-            <div class="row">
-                <div class="col-4" v-for="restObj in store.restaurantsArray">
-                    <AppCard :restaurantObject="restObj"/>
+                <div class="row">
+                    <div class="col-4" v-for="restObj in store.restaurantsArray">
+                        <AppCard :restaurantObject="restObj" />
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </template>
