@@ -76,8 +76,8 @@ export default {
 
   <div class="container">
     <h4>Scegli i tuoi piatti preferiti:</h4>
-    <div class="row">
-      <div v-for="typObj in filters" class="col-3">
+    <div class="row row-cols-3 row-cols-md-5">
+      <div v-for="typObj in filters" class="col">
         <AppTypology
           :typologyObject="typObj"
           @click="filterRestaurants(typObj.id)"

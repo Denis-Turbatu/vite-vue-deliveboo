@@ -1,7 +1,7 @@
 <script>
-import {store} from '../store.js';
+import { store } from '../store.js';
 export default {
-    data () {
+    data() {
         return {
             store,
             menu: [
@@ -20,18 +20,15 @@ export default {
         <div class="container-fluid">
             <img src="../assets/img/deliveboo_1.jpg" alt="">
             <form class="d-flex" role="search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Cerca</button>
             </form>
         </div>
     </nav>
 </template>
 
 <style scoped lang="scss">
-
 img {
     width: 20%;
 }
-
-
 </style>
