@@ -8,7 +8,7 @@
 
 <template>
     <div class="d-flex justify-content-center">
-        <div class="card">
+        <div class="card ms-height">
             <img :src="restaurantObject.image" class="card-img-top" alt="Immagine del ristorante">
             <div class="card-body text-center">
                 <h3 class="card-title font-weight-bold">{{ restaurantObject.business_name }}</h3>
@@ -30,6 +30,10 @@
 .card-img-top {
     height: 150px;
     object-fit: cover;
+}
+.ms-height{
+    max-height: 420px;
+    min-height: 420px;
 }
 .card-body {
     text-align: center;
