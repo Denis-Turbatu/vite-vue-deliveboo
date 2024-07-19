@@ -94,6 +94,7 @@ export default {
     </div>
     <hr />
 
+    <!-- SEARCH -->
     <div class="container">
       <div class="d-flex" role="search">
         <input
@@ -114,17 +115,8 @@ export default {
           Cerca
         </button>
       </div>
-      <!-- ________________ -->
-      <!-- <label for="search">Ricerca</label>
-      <input
-        type="text"
-        id="search"
-        name="search"
-        @keyup.enter="searchAction()"
-        v-model="query"
-      />
-      <button @click="searchAction()">Cerca</button>-->
     </div>
+    <!-- /SEARCH -->
     <hr />
 
     <div class="container">
