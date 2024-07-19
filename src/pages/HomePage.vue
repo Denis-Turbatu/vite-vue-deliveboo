@@ -71,7 +71,9 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <header>
+    <AppHeader />
+  </header>
 
   <main>
     <div class="bg-typology">
@@ -122,6 +124,6 @@ export default {
 
 <style lang="scss">
 .bg-typology {
-  background-color: rgb(208, 207, 207);
+  background-color: gray;
 }
 </style>
