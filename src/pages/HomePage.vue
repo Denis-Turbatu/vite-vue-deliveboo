@@ -9,7 +9,7 @@ export default {
   components: {
     AppCard,
     AppTypology,
-    AppHeader
+    AppHeader,
   },
   data() {
     return {
@@ -71,46 +71,57 @@ export default {
 </script>
 
 <template>
-
   <AppHeader />
 
-  <div class="container">
-    <h4>Scegli i tuoi piatti preferiti:</h4>
-    <div class="row row-cols-3 row-cols-md-5">
-      <div v-for="typObj in filters" class="col">
-        <AppTypology
-          :typologyObject="typObj"
-          @click="filterRestaurants(typObj.id)"
-        />
-        <!-- <div class="card-body" @click="filterRestaurants(typology.id)">
-                            <span>{{ typology.name }}</span>
-                        </div> -->
+  <main>
+    <div class="bg-typology">
+      <div class="container">
+        <h4>Scegli i tuoi piatti preferiti:</h4>
+        <div class="row row-cols-3 row-cols-md-5">
+          <div v-for="typObj in filters" class="col">
+            <AppTypology
+              :typologyObject="typObj"
+              @click="filterRestaurants(typObj.id)"
+            />
+            <!-- <div class="card-body" @click="filterRestaurants(typology.id)">
+                                <span>{{ typology.name }}</span>
+                            </div> -->
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <hr />
+    <hr />
 
-  <div class="container">
-    <label for="search">Ricerca</label>
-    <input
-      type="text"
-      id="search"
-      name="search"
-      @keyup.enter="searchAction()"
-      v-model="query"
-    />
-    <button @click="searchAction()">Cerca</button>
-  </div>
-  <hr />
+    <div class="container">
+      <!-- <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Cerca</button>
+          </form> -->
+      <label for="search">Ricerca</label>
+      <input
+        type="text"
+        id="search"
+        name="search"
+        @keyup.enter="searchAction()"
+        v-model="query"
+      />
+      <button @click="searchAction()">Cerca</button>
+    </div>
+    <hr />
 
-  <div class="container">
-    <h4>I ristoranti:</h4>
-    <div class="row">
-      <div class="col-4" v-for="restObj in store.restaurantsArray">
-        <AppCard :restaurantObject="restObj" />
+    <div class="container">
+      <h4>I ristoranti:</h4>
+      <div class="row">
+        <div class="col-4" v-for="restObj in store.restaurantsArray">
+          <AppCard :restaurantObject="restObj" />
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.bg-typology {
+  background-color: rgb(208, 207, 207);
+}
+</style>

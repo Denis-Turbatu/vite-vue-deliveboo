@@ -16,19 +16,33 @@ export default {
 </script>
 
 <template>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <img src="../assets/img/deliveboo_1.jpg" alt="">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Cerca</button>
-            </form>
-        </div>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+    <div class="container-fluid">
+      <img src="../assets/img/deliveboo_1.jpg" alt="" class="navbar-brand">
+      
+      <div class="d-flex align-items-center">
+        <a href="#" class="btn btn-link position-relative">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="/lavora-con-noi" class="btn btn-outline-success ms-2">Lavora con noi</a>
+        <a href="/contattaci" class="btn btn-outline-warning ms-2">Contattaci</a>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <style scoped lang="scss">
 img {
     width: 20%;
 }
+.custom-cart, .fa-shopping-cart {
+  font-size: 1.5rem;
+  color: #dc3545; /* Imposta il colore dell'icona del carrello a rosso */
+}
+
+a{
+    text-decoration: none;
+}
+
+
 </style>
