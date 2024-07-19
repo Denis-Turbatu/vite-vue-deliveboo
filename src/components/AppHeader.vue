@@ -55,4 +55,8 @@ img {
 a {
   text-decoration: none;
 }
+//Bottone dettagli
+.btn-outline-warning:hover {
+    color: rgb(255, 255, 255);
+}
 </style>

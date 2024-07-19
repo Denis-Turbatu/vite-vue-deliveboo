@@ -95,11 +95,27 @@ export default {
     <hr />
 
     <div class="container">
-      <!-- <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Cerca</button>
-          </form> -->
-      <label for="search">Ricerca</label>
+      <div class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="text"
+          id="search"
+          name="search"
+          @keyup.enter="searchAction()"
+          v-model="query"
+          placeholder="Cerca"
+          aria-label="Search"
+        />
+        <button
+          class="btn btn-outline-success"
+          type="submit"
+          @click="searchAction()"
+        >
+          Cerca
+        </button>
+      </div>
+      <!-- ________________ -->
+      <!-- <label for="search">Ricerca</label>
       <input
         type="text"
         id="search"
@@ -107,7 +123,7 @@ export default {
         @keyup.enter="searchAction()"
         v-model="query"
       />
-      <button @click="searchAction()">Cerca</button>
+      <button @click="searchAction()">Cerca</button>-->
     </div>
     <hr />
 
