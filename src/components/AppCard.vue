@@ -4,9 +4,9 @@ export default {
         restaurantObject: Object,
     },
     methods: {
-        goToRestaurantPage() {
-            this.$router.push({ name: 'Ristorante', params: { name: this.restaurantObject.business_name } });
-        }
+        // goToRestaurantPage() {
+        //     this.$router.push({ name: 'Ristorante', params: { name: this.restaurantObject.business_name } });
+        // }
     }
 }
 </script>
@@ -19,7 +19,7 @@ export default {
                 <!-- <p class="card-text">{{ restaurantObject.slug }}</p>
                 <p class="card-text">{{ restaurantObject.address }}</p> -->
                 <p class="card-text"><span class="badge badge-primary">{{ restaurantObject.typologies[0].name }}</span></p>
-                <button class="btn btn-primary" @click="goToRestaurantPage">Vedi Menu</button>
+                <!-- <button class="btn btn-primary" @click="goToRestaurantPage">Vedi Menu</button> -->
             </div>
         </router-link>
 </template>
@@ -34,8 +34,8 @@ export default {
     object-fit: cover;
 }
 .ms-height {
-    max-height: 420px;
-    min-height: 420px;
+    max-height: 300px;
+    min-height: 300px;
 }
 .card-body {
     text-align: center;
