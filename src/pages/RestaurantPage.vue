@@ -6,7 +6,7 @@
         data() {
             return {
                 restaurant: [],
-                selectedDishes: {},
+                selectedDishes: [],
                 store
             };
         },
@@ -25,24 +25,35 @@
                     });
             },
             goToCartPage() {
+                // evitare che il click attivi cose secondarie
                 event.preventDefault();
 
-                const selectedDishes = {};
+                // struttura per i dati + estrazione dati
+                const selectedDishes = [];
                 const inputs = document.querySelectorAll("input.ms-cart-prod");
 
+                // creazione struttura dati
                 inputs.forEach((curProd) => {
                     const quantity = parseInt(curProd.value);
 
                     if (quantity > 0) {
                         selectedDishes[curProd.id] = {
-                            quantity,
                             name: this.restaurant.dishes[curProd.id].name,
+                            description: this.restaurant.dishes[curProd.id].description,
+                            price: this.restaurant.dishes[curProd.id].price,
+                            quantity,
                         };
                     }
                 });
 
+                // assegnazione alla variabile vue
                 this.selectedDishes = selectedDishes;
-                console.log(this.selectedDishes);
+                
+                // passaggio alla pagina CartPage.vue con i dati in formato JSON
+                localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes))
+                this.$router.push({
+                    name: 'cart',
+                });
             },
         },
     };
@@ -69,19 +80,36 @@
         <!-- contenitore menu -->
         <div class="row">
             <!-- form per selezionare i piatti desiderati -->
-            <form class="w-50" @submit.prevent="goToCartPage">
+            <form class="w-75" @submit.prevent="goToCartPage">
                 <!-- card per ogni piatto -->
                 <div class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
                     v-for="(dish, index) in this.restaurant.dishes">
                     <!-- nome piatto -->
-                    <h3>{{ dish.name }}</h3>
+                    <div class="d-flex justify-content-between flex-grow-1 align-items-center p-2">
+                        <div class="ms-1 d-flex align-items-center">
+                            <img :src="`${dish.thumb}`" class="ms-img-product rounded" alt="">
+                            <section class="ms-2">
+                                <h6 class="fw-semibold mt-2 mb-2">
+                                    {{ dish.name }}
+                                </h6>
+                                <p class="m-0 mb-1">
+                                    {{ dish.description }}
+                                </p>
+                            </section>
+                        </div>
+                        <div class="me-3">
+                            <span>
+                                {{ dish.price }}
+                            </span>
+                        </div>
+                    </div>
                     <!-- contenitore + input quantità -->
                     <span class="d-flex justify-content-between">
                         <input type="number" min="0" value="0" class="ms-cart-prod" :id="index">
                     </span>
                 </div>
 
-                <button type="submit">Vai al carrello</button>
+                <button type="submit" class="btn btn-success">Vai al carrello</button>
             </form>
         </div>
     </div>
@@ -100,5 +128,11 @@
         border: solid 2px orange;
         padding: 5px 6px;
         margin-inline: 5px;
+        width: 200px;
+    }
+
+    .ms-img-product{
+        width: 70px;
+        height: 70px;
     }
 </style>

@@ -1,5 +1,32 @@
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      cartObject: []
+    };
+  },
+  methods: {
+    getProductPrice(price, quantity) {
+      return parseFloat(price * quantity).toFixed(2);
+    },
+    getOrderPrice() {
+      let totalPrice = 0;
+
+      for (const productKey in this.cartObject) {
+        const product = this.cartObject[productKey];
+        if (typeof product === "object" && product !== null) {
+          totalPrice += parseFloat(product.price) * parseInt(product.quantity);
+        }
+      }
+
+      return totalPrice.toFixed(2);
+    }
+  },
+  created() {
+    this.cartObject = JSON.parse(localStorage.getItem("cartProducts"));
+    console.log(this.cartObject);
+  }
+};
 </script>
 <template>
   <div class="container">
@@ -10,27 +37,55 @@ export default {};
           <div
             class="card mb-4 p-3 d-flex flex-row align-items-center justify-content-between"
           >
-            <div class="flex-grow-1 d-flex align-items-center">
-              <div class="info me-3">
-                <h5 class="card-title">hello</h5>
+            <div class="flex-grow-1 d-flex flex-column">
+              <div
+                class="info border border-1 my-2 w-50 rounded me-3 d-flex align-items-center"
+                v-for="curCartProd in this.cartObject"
+              >
+                <div class="ms-3 me-5">
+                  <span>
+                    {{
+                      getProductPrice(curCartProd.price, curCartProd.quantity)
+                    }}
+                  </span>
+                </div>
+                <div
+                  class="ms-1 d-flex align-items-center justify-content-between flex-grow-1"
+                >
+                  <section class="ms-2">
+                    <h6 class="fw-semibold mt-2 mb-2">
+                      {{ curCartProd.name }}
+                    </h6>
+                    <p class="m-0 mb-1">
+                      {{ curCartProd.description }}
+                    </p>
+                  </section>
+                  <div class="me-3">
+                    <span> {{ curCartProd.quantity }}x </span>
+                  </div>
+                </div>
+                <!-- <h5 class="card-title">hello</h5>
                 <p class="card-text">Prezzo:</p>
                 <div class="input-group mb-3 w-50">
                   <input type="number" class="form-control" min="1" />
                 </div>
                 <p class="card-text">Totale: €</p>
-                <button class="btn btn-danger">Rimuovi</button>
+                <button class="btn btn-danger">Rimuovi</button> -->
               </div>
             </div>
-            <img
+            <!-- <img
               src="../assets/img/img_prova.jpg"
               class="card-img-right rounded-circle"
               alt=""
               style="width: auto; max-width: 100px"
-            />
+            /> -->
           </div>
         </div>
         <div class="col-12 text-end">
-          <h3>Totale: €</h3>
+          <h3>
+            Totale: <span>{{ getOrderPrice() }}</span
+            >€
+          </h3>
         </div>
       </div>
     </div>
