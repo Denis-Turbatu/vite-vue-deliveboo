@@ -12,8 +12,7 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex justify-content-center">
-        <div class="card ms-height">
+        <router-link :to="{name: 'Ristorante', params: {slug: restaurantObject.slug}}" class="card ms-height">
             <img :src="restaurantObject.image" class="card-img-top" alt="Immagine del ristorante">
             <div class="card-body text-center">
                 <h3 class="card-title font-weight-bold">{{ restaurantObject.business_name }}</h3>
@@ -22,8 +21,7 @@ export default {
                 <p class="card-text"><span class="badge badge-primary">{{ restaurantObject.typologies[0].name }}</span></p>
                 <button class="btn btn-primary" @click="goToRestaurantPage">Vedi Menu</button>
             </div>
-        </div>
-    </div>
+        </router-link>
 </template>
 
 <style scoped lang="scss">
