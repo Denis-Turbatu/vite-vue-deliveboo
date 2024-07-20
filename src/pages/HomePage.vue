@@ -23,7 +23,6 @@ export default {
   methods: {
     getFilters() {
       axios.get("http://localhost:8000/api/typologies/").then((resp) => {
-        console.log(resp.data.results);
         this.filters = resp.data.results;
         this.store.typologiesArray = resp.data.results;
       });
@@ -34,7 +33,6 @@ export default {
           params: { typology_id: this.typology_id, search: store.searchQuery },
         })
         .then((resp) => {
-          // console.log(resp.data.results.data);
           this.store.restaurantsArray = resp.data.results;
         });
     },
@@ -58,8 +56,6 @@ export default {
         this.typology_id = id;
       }
 
-      console.log(this.typology_id);
-      console.log(this.isTypology);
       this.getRestaurants();
     },
   },
@@ -85,9 +81,6 @@ export default {
               :typologyObject="typObj"
               @click="filterRestaurants(typObj.id)"
             />
-            <!-- <div class="card-body" @click="filterRestaurants(typology.id)">
-                                <span>{{ typology.name }}</span>
-                            </div> -->
           </div>
         </div>
       </div>

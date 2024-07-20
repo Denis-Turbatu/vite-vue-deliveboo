@@ -3,12 +3,10 @@
     import { store } from "../store";
 
     export default {
-        // props: {
-        //     name: String,
-        // },
         data() {
             return {
                 restaurant: [],
+                selectedDishes: {},
                 store
             };
         },
@@ -17,19 +15,36 @@
         },
         methods: {
             fetchRestaurantData() {
-                // Inserire chiamata API
-                // Esempio:
-                // this.restaurant = findRestaurantByName(this.name);
                 const slug = this.$route.params.slug;
-                // console.log(slug);
+
                 axios
                     .get(`${this.store.urlBack}/api/restaurants/${slug}`)
                     .then((resp) => {
-                        console.log(resp.data);
+                        // console.log(resp.data);
                         this.restaurant = resp.data.results;
                     });
-            }
-        }
+            },
+            goToCartPage() {
+                event.preventDefault();
+
+                const selectedDishes = {};
+                const inputs = document.querySelectorAll("input.ms-cart-prod");
+
+                inputs.forEach((curProd) => {
+                    const quantity = parseInt(curProd.value);
+
+                    if (quantity > 0) {
+                        selectedDishes[curProd.id] = {
+                            quantity,
+                            name: this.restaurant.dishes[curProd.id].name,
+                        };
+                    }
+                });
+
+                this.selectedDishes = selectedDishes;
+                console.log(this.selectedDishes);
+            },
+        },
     };
 </script>
 
@@ -54,20 +69,19 @@
         <!-- contenitore menu -->
         <div class="row">
             <!-- form per selezionare i piatti desiderati -->
-            <form action="" method="" class="w-50">
+            <form class="w-50" @submit.prevent="goToCartPage">
                 <!-- card per ogni piatto -->
-                <div class="card my-3 w-100 d-flex flex-row align-items-center justify-content-between" v-for="(dish, index) in this.restaurant.dishes">
+                <div class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
+                    v-for="(dish, index) in this.restaurant.dishes">
                     <!-- nome piatto -->
                     <h3>{{ dish.name }}</h3>
                     <!-- contenitore + input quantità -->
                     <span class="d-flex justify-content-between">
-                        <input type="number" min="0" value="0">
+                        <input type="number" min="0" value="0" class="ms-cart-prod" :id="index">
                     </span>
                 </div>
 
-                <router-link :to="{name: 'cart'}">
-                    <button type="submit">Vai al carrello</button>
-                </router-link>
+                <button type="submit">Vai al carrello</button>
             </form>
         </div>
     </div>
@@ -82,9 +96,9 @@
     background-size: cover;
 } */
 
- .ms-add-cart{
-    border: solid 2px orange;
-    padding: 5px 6px;
-    margin-inline: 5px;
- }
+    .ms-cart-prod {
+        border: solid 2px orange;
+        padding: 5px 6px;
+        margin-inline: 5px;
+    }
 </style>
