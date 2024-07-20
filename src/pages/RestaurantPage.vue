@@ -37,7 +37,7 @@
     <!-- container -->
     <div class="container my-5">
         <div class="mb-3">
-            <router-link :to="{name: home}" class="text-decoration-none">Indietro</router-link>
+            <router-link :to="{name: 'home'}" class="text-decoration-none">Indietro</router-link>
         </div>
         <!-- sezione immagine-titoli -->
         <div class="row g-2 mb-5">
