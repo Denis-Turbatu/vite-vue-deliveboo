@@ -35,7 +35,7 @@ export default {
 }
 .ms-height {
     max-height: 300px;
-    min-height: 300px;
+    min-height: 0px;
 }
 .card-body {
     text-align: center;
