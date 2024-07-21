@@ -7,7 +7,8 @@
             return {
                 restaurant: [],
                 selectedDishes: [],
-                store
+                store,
+                restSlug: null,
             };
         },
         created() {
@@ -50,14 +51,13 @@
 
                 // assegnazione alla variabile vue
                 this.selectedDishes = selectedDishes;
-                // console.log('52', Array.isArray(this.selectedDishes));
-                // console.log('53', Array.isArray(selectedDishes));
-
+                this.restSlug = this.restaurant.slug;
                 
                 // passaggio alla pagina CartPage.vue con i dati in formato JSON
                 localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes))
+                localStorage.setItem("curSlug", JSON.stringify(this.restSlug))
                 this.$router.push({
-                    name: 'cart',
+                    name: 'carrello',
                 });
             },
         },
@@ -104,7 +104,7 @@
                         </div>
                         <div class="me-3">
                             <span>
-                                {{ dish.price }}
+                                {{ dish.price }}€
                             </span>
                         </div>
                     </div>

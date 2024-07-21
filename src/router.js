@@ -12,14 +12,14 @@ const router = createRouter({
       component: HomePage,
     },
     {
-      path: "/cart",
-      name: "cart",
+      path: "/carrello",
+      name: "carrello",
       component: CartPage,
       props: true
     },
     {
       path: "/ristorante/:slug",
-      name: "Ristorante",
+      name: "ristorante",
       component: RestaurantPage,
       props: true
     },

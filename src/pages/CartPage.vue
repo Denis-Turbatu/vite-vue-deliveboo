@@ -2,7 +2,8 @@
 export default {
   data() {
     return {
-      cartArray: []
+      cartArray: [],
+      slug: null,
     };
   },
   methods: {
@@ -31,13 +32,20 @@ export default {
   },
   created() {
     this.cartArray = JSON.parse(localStorage.getItem("cartProducts"));
+    this.slug = JSON.parse(localStorage.getItem("curSlug"));
   }
 };
 </script>
 <template>
   <div class="container">
     <div class="cart my-4">
-      <h1 class="mb-4">Il tuo carrello</h1>
+      <div class="d-flex justify-content-between">
+        <h1 class="mb-4">Il tuo carrello</h1>
+
+        <router-link :to="`/ristorante/${this.slug}`">
+          <button class="btn btn-outline-primary">Torna al Menu</button>
+        </router-link>
+      </div>
       <div class="row">
         <div class="col-12">
           <div
