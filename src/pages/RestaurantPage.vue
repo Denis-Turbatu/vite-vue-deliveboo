@@ -37,12 +37,12 @@
                     const quantity = parseInt(curProd.value);
 
                     if (quantity > 0) {
-                        selectedDishes[curProd.id] = {
+                        selectedDishes.push({
                             name: this.restaurant.dishes[curProd.id].name,
                             description: this.restaurant.dishes[curProd.id].description,
                             price: this.restaurant.dishes[curProd.id].price,
                             quantity,
-                        };
+                        });
                     }
                 });
 
