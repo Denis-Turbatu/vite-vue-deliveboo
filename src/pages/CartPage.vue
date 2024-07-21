@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      cartObject: []
+      cartArray: []
     };
   },
   methods: {
@@ -12,19 +12,25 @@ export default {
     getOrderPrice() {
       let totalPrice = 0;
 
-      for (const productKey in this.cartObject) {
-        const product = this.cartObject[productKey];
+      for (const productKey in this.cartArray) {
+        const product = this.cartArray[productKey];
         if (typeof product === "object" && product !== null) {
           totalPrice += parseFloat(product.price) * parseInt(product.quantity);
         }
       }
 
       return totalPrice.toFixed(2);
+    },
+    deleteProd(index){
+      console.log(this.cartArray);
+      this.cartArray.splice(index, 1);
+      console.log(this.cartArray);
+      this.cartArray = localStorage.setItem("cartProducts", JSON.stringify(this.cartArray))
+      this.cartArray = JSON.parse(localStorage.getItem("cartProducts"));
     }
   },
   created() {
-    this.cartObject = JSON.parse(localStorage.getItem("cartProducts"));
-    console.log(this.cartObject);
+    this.cartArray = JSON.parse(localStorage.getItem("cartProducts"));
   }
 };
 </script>
@@ -39,8 +45,8 @@ export default {
           >
             <div class="flex-grow-1 d-flex flex-column">
               <div
-                class="info border border-1 my-2 w-50 rounded me-3 d-flex align-items-center"
-                v-for="curCartProd in this.cartObject"
+                class="info border border-1 my-2 w-75 rounded me-3 d-flex align-items-center"
+                v-for="(curCartProd, index) in this.cartArray"
               >
                 <div class="ms-3 me-5">
                   <span>
@@ -61,7 +67,13 @@ export default {
                     </p>
                   </section>
                   <div class="me-3">
-                    <span> {{ curCartProd.quantity }}x </span>
+                    <span class="mx-4">
+                      <input type="number" min="0" class="ms-cart-prod" :value="`${curCartProd.quantity}`"></input>
+                    </span>
+
+                    <span class="me-2" @click="deleteProd(index)">
+                      <i class="fa-solid fa-trash-can text-danger"></i>
+                    </span>
                   </div>
                 </div>
                 <!-- <h5 class="card-title">hello</h5>
@@ -92,4 +104,11 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.ms-cart-prod {
+        border: solid 2px orange;
+        padding: 5px 6px;
+        margin-inline: 5px;
+        width: 70px;
+    }
+</style>

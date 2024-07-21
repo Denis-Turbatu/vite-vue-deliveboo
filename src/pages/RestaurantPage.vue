@@ -30,6 +30,8 @@
 
                 // struttura per i dati + estrazione dati
                 const selectedDishes = [];
+                // console.log('33', Array.isArray(selectedDishes));
+                // console.log('34', Array.isArray(this.selectedDishes));
                 const inputs = document.querySelectorAll("input.ms-cart-prod");
 
                 // creazione struttura dati
@@ -48,6 +50,9 @@
 
                 // assegnazione alla variabile vue
                 this.selectedDishes = selectedDishes;
+                // console.log('52', Array.isArray(this.selectedDishes));
+                // console.log('53', Array.isArray(selectedDishes));
+
                 
                 // passaggio alla pagina CartPage.vue con i dati in formato JSON
                 localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes))
