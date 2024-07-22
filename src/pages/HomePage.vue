@@ -111,7 +111,7 @@ export default {
       <div class="container">
         <h4>I ristoranti:</h4>
         <div class="row">
-          <div class="col-4" v-for="restObj in store.restaurantsArray">
+          <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray">
             <AppCard :restaurantObject="restObj" />
           </div>
         </div>
