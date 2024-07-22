@@ -10,7 +10,7 @@ export default {
           title: "Home",
         },
         {
-          routeName: "cart",
+          routeName: "carrello",
           title: "Cart",
         },
       ],
@@ -28,7 +28,7 @@ export default {
         <!-- <a href="#" class="btn btn-link position-relative">
           <i class="fas fa-shopping-cart"></i>
         </a> -->
-        <router-link to="/cart" class="btn btn-link position-relative">
+        <router-link to="/carrello" class="btn btn-link position-relative">
           <i class="fas fa-shopping-cart custom-cart"></i>
         </router-link>
         <a href="/lavora-con-noi" class="btn btn-outline-success ms-2"
@@ -55,7 +55,7 @@ img {
 a {
   text-decoration: none;
 }
-//Bottone dettagli
+/* Bottone dettagli */
 .btn-outline-warning:hover {
     color: rgb(255, 255, 255);
 }
