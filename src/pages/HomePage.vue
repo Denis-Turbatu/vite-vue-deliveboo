@@ -18,6 +18,7 @@ export default {
       store,
       typology_id: "",
       isTypology: false,
+      isLoaded: false,
     };
   },
   methods: {
@@ -28,12 +29,14 @@ export default {
       });
     },
     getRestaurants() {
+      this.isLoaded = true;
       axios
         .get("http://localhost:8000/api/restaurants/", {
           params: { typology_id: this.typology_id, search: store.searchQuery },
         })
         .then((resp) => {
           this.store.restaurantsArray = resp.data.results;
+          this.isLoaded = false;
         });
     },
     searchAction() {
@@ -67,60 +70,62 @@ export default {
 </script>
 
 <template>
-  <header>
-    <AppHeader />
-  </header>
-
-  <main>
-    <div class="bg-typology">
-      <div class="container">
-        <h4>Scegli i tuoi piatti preferiti:</h4>
-        <div class="row row-cols-3 row-cols-md-5">
-          <div v-for="typObj in filters" class="col">
-            <AppTypology
-              :typologyObject="typObj"
-              @click="filterRestaurants(typObj.id)"
-            />
+  <div v-if="!isLoaded">
+    <header>
+      <AppHeader />
+    </header>
+    <main>
+      <div class="bg-typology">
+        <div class="container">
+          <h4>Scegli i tuoi piatti preferiti:</h4>
+          <div class="row row-cols-3 row-cols-md-5">
+            <div v-for="typObj in filters" class="col">
+              <AppTypology
+                :typologyObject="typObj"
+                @click="filterRestaurants(typObj.id)"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <hr />
-
-    <!-- SEARCH -->
-    <div class="container">
-      <div class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="text"
-          id="search"
-          name="search"
-          @keyup.enter="searchAction()"
-          v-model="query"
-          placeholder="Cerca"
-          aria-label="Search"
-        />
-        <button
-          class="btn btn-outline-success"
-          type="submit"
-          @click="searchAction()"
-        >
-          Cerca
-        </button>
-      </div>
-    </div>
-    <!-- /SEARCH -->
-    <hr />
-
-    <div class="container">
-      <h4>I ristoranti:</h4>
-      <div class="row">
-        <div class="col-4" v-for="restObj in store.restaurantsArray">
-          <AppCard :restaurantObject="restObj" />
+      <hr />
+      <!-- SEARCH -->
+      <div class="container">
+        <div class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="text"
+            id="search"
+            name="search"
+            @keyup.enter="searchAction()"
+            v-model="query"
+            placeholder="Cerca"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+            @click="searchAction()"
+          >
+            Cerca
+          </button>
         </div>
       </div>
-    </div>
-  </main>
+      <!-- /SEARCH -->
+      <hr />
+      <div class="container">
+        <h4>I ristoranti:</h4>
+        <div class="row">
+          <div class="col-4" v-for="restObj in store.restaurantsArray">
+            <AppCard :restaurantObject="restObj" />
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div v-else>
+    sta caricando
+  </div>
 </template>
 
 <style lang="scss">

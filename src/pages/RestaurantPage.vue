@@ -9,13 +9,12 @@
                 selectedDishes: [],
                 store,
                 restSlug: null,
+                isLoaded: false,
             };
-        },
-        created() {
-            this.fetchRestaurantData();
         },
         methods: {
             fetchRestaurantData() {
+                this.isLoaded = true;
                 const slug = this.$route.params.slug;
 
                 axios
@@ -23,6 +22,7 @@
                     .then((resp) => {
                         // console.log(resp.data);
                         this.restaurant = resp.data.results;
+                        this.isLoaded = false
                     });
             },
             goToCartPage() {
@@ -61,12 +61,15 @@
                 });
             },
         },
+        created() {
+            this.fetchRestaurantData();
+        },
     };
 </script>
 
 <template>
     <!-- container -->
-    <div class="container my-5">
+    <div class="container my-5" v-if="!isLoaded">
         <div class="mb-3">
             <router-link :to="{name: 'home'}" class="text-decoration-none">Indietro</router-link>
         </div>
@@ -117,6 +120,9 @@
                 <button type="submit" class="btn btn-success">Vai al carrello</button>
             </form>
         </div>
+    </div>
+    <div v-else>
+        sta caricando
     </div>
 </template>
 
