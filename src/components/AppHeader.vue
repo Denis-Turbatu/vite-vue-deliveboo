@@ -22,7 +22,10 @@ export default {
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-      <img src="../assets/img/deliveboo_1.jpg" alt="" class="navbar-brand" />
+      <router-link :to="{name: 'home'}">
+        <img src="../assets/img/deliveboo_1.jpg" alt="" class="navbar-brand ms_logo" />
+        
+      </router-link>
 
       <div class="d-flex align-items-center">
         <!-- <a href="#" class="btn btn-link position-relative">
@@ -44,7 +47,7 @@ export default {
 
 <style scoped lang="scss">
 img {
-  width: 20%;
+  width: 40%;
 }
 .custom-cart,
 .fa-shopping-cart {
