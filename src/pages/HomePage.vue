@@ -3,13 +3,11 @@ import axios from "axios";
 import { store } from "../store.js";
 import AppCard from "../components/AppCard.vue";
 import AppTypology from "../components/AppTypology.vue";
-import AppHeader from "../components/AppHeader.vue";
 
 export default {
   components: {
     AppCard,
     AppTypology,
-    AppHeader,
   },
   data() {
     return {
@@ -71,9 +69,6 @@ export default {
 
 <template>
   <div v-if="!isLoaded">
-    <header>
-      <AppHeader />
-    </header>
     <main>
       <div class="bg-typology">
         <div class="container">

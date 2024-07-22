@@ -1,6 +1,7 @@
 <script>
     import axios from "axios";
     import { store } from "../store";
+    
 
     export default {
         data() {
@@ -20,20 +21,26 @@
                 axios
                     .get(`${this.store.urlBack}/api/restaurants/${slug}`)
                     .then((resp) => {
-                        // console.log(resp.data);
+                        console.log(resp.data.results);
                         this.restaurant = resp.data.results;
-                        this.isLoaded = false
+                        this.isLoaded = false;
                     });
             },
             goToCartPage() {
                 // evitare che il click attivi cose secondarie
                 event.preventDefault();
 
+                // if che controlla l'update
+                if(store.storeRestaurantId = this.restaurant.id){
+                    console.log('daje');
+                }else{
+                    console.log('no');
+                }
+
                 // struttura per i dati + estrazione dati
                 const selectedDishes = [];
-                // console.log('33', Array.isArray(selectedDishes));
-                // console.log('34', Array.isArray(this.selectedDishes));
                 const inputs = document.querySelectorAll("input.ms-cart-prod");
+                
 
                 // creazione struttura dati
                 inputs.forEach((curProd) => {

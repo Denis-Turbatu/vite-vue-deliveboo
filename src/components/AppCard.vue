@@ -1,7 +1,13 @@
 <script>
+    import {store} from '../store';
 export default {
     props: {
         restaurantObject: Object,
+    },
+    data() {
+        return {
+            store,
+        }
     },
     methods: {
         // goToRestaurantPage() {
@@ -12,7 +18,8 @@ export default {
 </script>
 
 <template>
-        <router-link :to="{name: 'ristorante', params: {slug: restaurantObject.slug}}" class="card ms-height text-decoration-none">
+        <router-link :to="{name: 'ristorante', params: {slug: restaurantObject.slug}}" @click="store.storeRestaurantId = restaurantObject.id" class="card ms-height text-decoration-none">
+            
             <img :src="restaurantObject.image" class="card-img-top" alt="Immagine del ristorante">
             <div class="card-body text-center">
                 <h3 class="card-title font-weight-bold">{{ restaurantObject.business_name }}</h3>
