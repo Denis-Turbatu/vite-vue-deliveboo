@@ -31,14 +31,13 @@ export default {
         <!-- <a href="#" class="btn btn-link position-relative">
           <i class="fas fa-shopping-cart"></i>
         </a> -->
-        <router-link to="/carrello" class="btn btn-link position-relative">
+        <router-link :to="{name: 'carrello'}" class="btn btn-link position-relative">
           <i class="fas fa-shopping-cart custom-cart"></i>
         </router-link>
-        <a href="/lavora-con-noi" class="btn btn-outline-success ms-2"
-          >Lavora con noi</a
-        >
-        <a href="/contattaci" class="btn btn-outline-warning ms-2"
-          >Contattaci</a
+        <router-link :to="{path: '/lavora-con_noi'}" class="btn btn-outline-success ms-2"
+          >Lavora con noi</router-link>
+        <router-link :to="{path: '/contattaci'}" class="btn btn-outline-warning ms-2"
+          >Contattaci</router-link
         >
       </div>
     </div>

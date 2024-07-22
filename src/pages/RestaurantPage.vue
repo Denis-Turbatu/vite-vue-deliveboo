@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             restaurant: [],
+            localStorageRestaurantId: null,
             selectedDishes: [],
             store,
             restSlug: null,
@@ -49,6 +50,7 @@ export default {
             // event.preventDefault();
 
             const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
+            const cartRestaurantId = JSON.parse(localStorage.getItem("localStorageRestaurantId"));
 
             // console.log(cartProducts);
             // if (cartProducts && cartProducts.length > 0) {
@@ -62,7 +64,7 @@ export default {
             //     console.log('esiste ed è uguale a zero');
             // }
 
-            if (cartProducts.length > 0 && cartRestaurantId && cartRestaurantId !== this.restaurant.id) {
+            if (cartProducts.length > 0 && cartRestaurantId && cartRestaurantId !== this.store.storeRestaurantId) {
                 alert("Non puoi aggiungere prodotti da un ristorante diverso. Svuota il carrello per aggiungere nuovi prodotti.");
                 return;
             }
@@ -88,6 +90,7 @@ export default {
 
             localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
             localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
+            localStorage.setItem("localStorageRestaurantId", JSON.stringify(this.store.storeRestaurantId));
             this.$router.push({ name: "carrello" });
         },
     },
