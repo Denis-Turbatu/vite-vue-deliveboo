@@ -1,195 +1,145 @@
 <script>
-import axios from "axios";
-import { store } from "../store";
-import NotFoundPage from "./NotFoundPage.vue";
+    import axios from "axios";
+    import { store } from "../store";
+    import NotFoundPage from "./NotFoundPage.vue";
 
-export default {
-  components: {
-    NotFoundPage,
-  },
-  data() {
-    return {
-      restaurant: [],
-      selectedDishes: [],
-      store,
-      restSlug: null,
-      isLoaded: false,
-    };
-  },
-  methods: {
-    fetchRestaurantData() {
-      this.isLoaded = true;
-      const slug = this.$route.params.slug;
+    export default {
+        components: {
+            NotFoundPage,
+        },
+        data() {
+            return {
+                restaurant: [],
+                selectedDishes: [],
+                store,
+                restSlug: null,
+                isLoaded: false,
+                dishQuantities: [],
+            };
+        },
+        methods: {
+            fetchRestaurantData() {
+                this.isLoaded = true;
+                const slug = this.$route.params.slug;
 
-      axios
-        .get(`${this.store.urlBack}/api/restaurants/${slug}`)
-        .then((resp) => {
-          console.log(resp.data.results);
-          if (resp.data.results) {
-            this.restaurant = resp.data.results;
-            // Dato che i piatti sono già ordinati nel backend, non è necessario riordinarli qui
-            
-            //sort funzione di JS per ordinare gli array
-            //localeCompare metodo dlle stringhe che confronta due stringhe in base all'ordine alfabetico
-            //a b  rappresentano due oggetti piatto presi dall'array dishes
-            // this.restaurant.dishes.sort((a, b) => a.name.localeCompare(b.name));
-          } else {
-            this.restaurant = [];
-          }
-          this.isLoaded = false;
-        })
-        .catch((error) => {
-          //console.error(error);
-          this.restaurant = [];
-          this.isLoaded = false;
-        });
-    },
-    goToCartPage() {
-      // evitare che il click attivi cose secondarie
-      event.preventDefault();
+                axios
+                    .get(`${this.store.urlBack}/api/restaurants/${slug}`)
+                    .then((resp) => {
+                        if (resp.data.results) {
+                            this.restaurant = resp.data.results;
+                            this.dishQuantities = this.restaurant.dishes.map(() => 0); // inizializza quantità a 0 per ogni piatto 
+                            const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
+                            cartProducts.forEach(cartProduct => {
+                                const index = this.restaurant.dishes.findIndex(dish => dish.name === cartProduct.name);
+                                if (index !== -1) {
+                                    this.dishQuantities[index] = cartProduct.quantity;
+                                }
+                            });
+                        } else {
+                            this.restaurant = [];
+                        }
+                        this.isLoaded = false;
+                    })
+                    .catch(() => {
+                        this.restaurant = [];
+                        this.isLoaded = false;
+                    });
+            },
+            goToCartPage() {
+                event.preventDefault();
 
-      // if che controlla l'update
-      if ((store.storeRestaurantId = this.restaurant.id)) {
-        console.log("daje");
-      } else {
-        console.log("no");
-      }
+                const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
-      // struttura per i dati + estrazione dati
-      const selectedDishes = [];
-      const inputs = document.querySelectorAll("input.ms-cart-prod");
+                const updatedDishes = this.restaurant.dishes
+                    .map((dish, index) => ({
+                        ...dish,
+                        quantity: this.dishQuantities[index],
+                    }))
+                    .filter(dish => dish.quantity > 0);
 
-      // creazione struttura dati
-      inputs.forEach((curProd) => {
-        const quantity = parseInt(curProd.value);
+                updatedDishes.forEach(updatedDish => {
+                    const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
+                    if (index !== -1) {
+                        cartProducts[index] = updatedDish;
+                    } else {
+                        cartProducts.push(updatedDish);
+                    }
+                });
 
-        if (quantity > 0) {
-          selectedDishes.push({
-            name: this.restaurant.dishes[curProd.id].name,
-            description: this.restaurant.dishes[curProd.id].description,
-            price: this.restaurant.dishes[curProd.id].price,
-            quantity,
-          });
-        }
-      });
+                this.selectedDishes = cartProducts;
+                this.restSlug = this.restaurant.slug;
 
-      // assegnazione alla variabile vue
-      this.selectedDishes = selectedDishes;
-      this.restSlug = this.restaurant.slug;
-
-      // passaggio alla pagina CartPage.vue con i dati in formato JSON
-      localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
-      localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
-      this.$router.push({
-        name: "carrello",
-      });
-    },
-  },
-  created() {
-    this.fetchRestaurantData();
-  },
-};
+                localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
+                localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
+                this.$router.push({ name: "carrello" });
+            },
+        },
+        created() {
+            this.fetchRestaurantData();
+        },
+    }; 
 </script>
 
 <template>
-  <!-- Verifica se i dati sono stati caricati e se il ristorante esiste -->
-  <div v-if="!isLoaded">
-    <div v-if="restaurant && restaurant.id">
-      <!-- container -->
-      <div class="container my-5">
-        <div class="mb-3">
-          <router-link :to="{ name: 'home' }" class="text-decoration-none"
-            >Indietro</router-link
-          >
-        </div>
-        <!-- sezione immagine-titoli -->
-        <div class="row g-2 mb-5">
-          <!-- immagine -->
-          <div class="ms_cover-image col col-12 col-lg-4">
-            <img class="img-fluid" :src="this.restaurant.image" alt="" />
-          </div>
-          <!-- titoli -->
-          <div class="col col col-12 col-lg-8">
-            <h1>{{ this.restaurant.business_name }}</h1>
-          </div>
-        </div>
+    <div v-if="!isLoaded">
+        <div v-if="restaurant && restaurant.id">
+            <div class="container my-5">
+                <div class="mb-3">
+                    <router-link :to="{ name: 'home' }" class="text-decoration-none">Indietro</router-link>
+                </div>
+                <div class="row g-2 mb-5">
+                    <div class="ms_cover-image col col-12 col-lg-4">
+                        <img class="img-fluid" :src="restaurant.image" alt="" />
+                    </div>
+                    <div class="col col col-12 col-lg-8">
+                        <h1>{{ restaurant.business_name }}</h1>
+                    </div>
+                </div>
 
-        <!-- contenitore menu -->
-        <div class="row">
-          <!-- form per selezionare i piatti desiderati -->
-          <form class="w-75" @submit.prevent="goToCartPage">
-            <!-- card per ogni piatto -->
-            <div
-              class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
-              v-for="(dish, index) in this.restaurant.dishes"
-              :key="index"
-            >
-              <!-- nome piatto -->
-              <div
-                class="d-flex justify-content-between flex-grow-1 align-items-center p-2"
-              >
-                <div class="ms-1 d-flex align-items-center">
-                  <img
-                    :src="`${dish.thumb}`"
-                    class="ms-img-product rounded"
-                    alt=""
-                  />
-                  <section class="ms-2">
-                    <h6 class="fw-semibold mt-2 mb-2">
-                      {{ dish.name }}
-                    </h6>
-                    <p class="m-0 mb-1">
-                      {{ dish.description }}
-                    </p>
-                  </section>
+                <div class="row">
+                    <form class="w-75" @submit.prevent="goToCartPage">
+                        <div class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
+                            v-for="(dish, index) in restaurant.dishes" :key="index">
+                            <div class="d-flex justify-content-between flex-grow-1 align-items-center p-2">
+                                <div class="ms-1 d-flex align-items-center">
+                                    <img :src="dish.thumb" class="ms-img-product rounded" alt="" />
+                                    <section class="ms-2">
+                                        <h6 class="fw-semibold mt-2 mb-2">{{ dish.name }}</h6>
+                                        <p class="m-0 mb-1">{{ dish.description }}</p>
+                                    </section>
+                                </div>
+                                <div class="me-3">
+                                    <span>{{ dish.price }}€</span>
+                                </div>
+                            </div>
+                            <span class="d-flex justify-content-between">
+                                <input type="number" min="0" class="ms-cart-prod"
+                                    v-model.number="dishQuantities[index]" />
+                            </span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Vai al carrello</button>
+                    </form>
                 </div>
-                <div class="me-3">
-                  <span> {{ dish.price }}€ </span>
-                </div>
-              </div>
-              <!-- contenitore + input quantità -->
-              <span class="d-flex justify-content-between">
-                <input
-                  type="number"
-                  min="0"
-                  value="0"
-                  class="ms-cart-prod"
-                  :id="index"
-                />
-              </span>
             </div>
-
-            <button type="submit" class="btn btn-success">
-              Vai al carrello
-            </button>
-          </form>
         </div>
-      </div>
+        <div v-else>
+            <NotFoundPage />
+        </div>
     </div>
-    <div v-else>
-      <NotFoundPage />
-    </div>
-  </div>
-  <div class="fw-bold px-3" v-else>Sta caricando</div>
+    <div class="fw-bold px-3" v-else>Sta caricando</div>
 </template>
 
 <style scoped lang="scss">
-/* .ms_cover-image {
-    height: 300px;
-    width: 350px;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
+    .ms-cart-prod {
+        border: solid 2px orange;
+        padding: 5px 6px;
+        margin-inline: 5px;
+        width: 200px;
+    }
 
-.ms-cart-prod {
-  border: solid 2px orange;
-  padding: 5px 6px;
-  margin-inline: 5px;
-  width: 200px;
-}
-
-.ms-img-product {
-  width: 70px;
-  height: 70px;
-}
+    .ms-img-product {
+        width: 70px;
+        height: 70px;
+    }
 </style>
