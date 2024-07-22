@@ -25,12 +25,22 @@ export default {
         .get(`${this.store.urlBack}/api/restaurants/${slug}`)
         .then((resp) => {
           console.log(resp.data.results);
-          this.restaurant = resp.data.results;
+          if (resp.data.results) {
+            this.restaurant = resp.data.results;
+            // Dato che i piatti sono già ordinati nel backend, non è necessario riordinarli qui
+            
+            //sort funzione di JS per ordinare gli array
+            //localeCompare metodo dlle stringhe che confronta due stringhe in base all'ordine alfabetico
+            //a b  rappresentano due oggetti piatto presi dall'array dishes
+            // this.restaurant.dishes.sort((a, b) => a.name.localeCompare(b.name));
+          } else {
+            this.restaurant = [];
+          }
           this.isLoaded = false;
         })
         .catch((error) => {
           //console.error(error);
-          this.restaurant = null;
+          this.restaurant = [];
           this.isLoaded = false;
         });
     },
@@ -160,11 +170,10 @@ export default {
       <NotFoundPage />
     </div>
   </div>
-  <div class="fw-bold px-3" v-else> Sta caricando</div>
+  <div class="fw-bold px-3" v-else>Sta caricando</div>
 </template>
 
 <style scoped lang="scss">
-
 /* .ms_cover-image {
     height: 300px;
     width: 350px;

@@ -33,7 +33,10 @@ export default {
           params: { typology_id: this.typology_id, search: store.searchQuery },
         })
         .then((resp) => {
-          this.store.restaurantsArray = resp.data.results;
+          //sort() funzione JS - i ristoranti sono in ordine alfabetico n
+          this.store.restaurantsArray = resp.data.results.sort((a, b) =>
+            a.business_name.localeCompare(b.business_name)
+          );
           this.isLoaded = false;
         });
     },
@@ -111,14 +114,17 @@ export default {
       <div class="container">
         <h4>I ristoranti:</h4>
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray">
+          <div
+            class="col-12 col-sm-6 col-md-4"
+            v-for="restObj in store.restaurantsArray"
+          >
             <AppCard :restaurantObject="restObj" />
           </div>
         </div>
       </div>
     </main>
   </div>
-  <div class="fw-bold px-3" v-else> Sta caricando</div>
+  <div class="fw-bold px-3" v-else>Sta caricando</div>
 </template>
 
 <style lang="scss">
