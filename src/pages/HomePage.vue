@@ -118,9 +118,7 @@ export default {
       </div>
     </main>
   </div>
-  <div v-else>
-    sta caricando
-  </div>
+  <div class="fw-bold px-3" v-else> Sta caricando</div>
 </template>
 
 <style lang="scss">

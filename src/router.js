@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/HomePage.vue";
 import CartPage from "./pages/CartPage.vue";
 import RestaurantPage from "./pages/RestaurantPage.vue";
+import NotFoundPage from "./pages/NotFoundPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,12 @@ const router = createRouter({
       name: "ristorante",
       component: RestaurantPage,
       props: true
+    },
+    {
+      //qualsiasi rotta tranne quelli specificati sopra
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: NotFoundPage,
     },
   ],
 });
