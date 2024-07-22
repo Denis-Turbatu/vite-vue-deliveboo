@@ -71,6 +71,17 @@ export default {
 </script>
 
 <template>
+  <!-- HERO SECTION -->
+  <!-- <div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop>
+      <source
+        src="https://cdn.pixabay.com/video/2023/08/04/174561-851804290_large.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </div> -->
+  <!-- /HERO SECTION -->
+
   <div v-if="!isLoaded">
     <main>
       <div class="bg-typology">
@@ -85,8 +96,8 @@ export default {
             </div>
           </div>
         </div>
+        <hr />
       </div>
-      <hr />
       <!-- SEARCH -->
       <div class="container">
         <div class="d-flex" role="search">
@@ -129,6 +140,23 @@ export default {
 
 <style lang="scss">
 .bg-typology {
-  background-color: gray;
+  background-color: rgb(227, 227, 227);
 }
+
+// .hero-video-container {
+//   position: relative;
+//   width: 100%;
+//   height: 80vh;
+//   overflow: hidden;
+// }
+
+// .hero-video {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+//   transform: translate(-50%, -50%);
+// }
 </style>
