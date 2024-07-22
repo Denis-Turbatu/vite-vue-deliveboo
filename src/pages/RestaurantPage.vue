@@ -1,83 +1,100 @@
 <script>
-    import axios from "axios";
-    import { store } from "../store";
-    import NotFoundPage from "./NotFoundPage.vue";
+import axios from "axios";
+import { store } from "../store";
+import NotFoundPage from "./NotFoundPage.vue";
 
-    export default {
-        components: {
-            NotFoundPage,
-        },
-        data() {
-            return {
-                restaurant: [],
-                selectedDishes: [],
-                store,
-                restSlug: null,
-                isLoaded: false,
-                dishQuantities: [],
-            };
-        },
-        methods: {
-            fetchRestaurantData() {
-                this.isLoaded = true;
-                const slug = this.$route.params.slug;
+export default {
+    components: {
+        NotFoundPage,
+    },
+    data() {
+        return {
+            restaurant: [],
+            selectedDishes: [],
+            store,
+            restSlug: null,
+            isLoaded: false,
+            dishQuantities: [],
+        };
+    },
+    methods: {
+        fetchRestaurantData() {
+            this.isLoaded = true;
+            const slug = this.$route.params.slug;
 
-                axios
-                    .get(`${this.store.urlBack}/api/restaurants/${slug}`)
-                    .then((resp) => {
-                        if (resp.data.results) {
-                            this.restaurant = resp.data.results;
-                            this.dishQuantities = this.restaurant.dishes.map(() => 0); // inizializza quantità a 0 per ogni piatto 
-                            const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
-                            cartProducts.forEach(cartProduct => {
-                                const index = this.restaurant.dishes.findIndex(dish => dish.name === cartProduct.name);
-                                if (index !== -1) {
-                                    this.dishQuantities[index] = cartProduct.quantity;
-                                }
-                            });
-                        } else {
-                            this.restaurant = [];
-                        }
-                        this.isLoaded = false;
-                    })
-                    .catch(() => {
-                        this.restaurant = [];
-                        this.isLoaded = false;
-                    });
-            },
-            goToCartPage() {
-                event.preventDefault();
-
-                const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
-
-                const updatedDishes = this.restaurant.dishes
-                    .map((dish, index) => ({
-                        ...dish,
-                        quantity: this.dishQuantities[index],
-                    }))
-                    .filter(dish => dish.quantity > 0);
-
-                updatedDishes.forEach(updatedDish => {
-                    const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
-                    if (index !== -1) {
-                        cartProducts[index] = updatedDish;
+            axios
+                .get(`${this.store.urlBack}/api/restaurants/${slug}`)
+                .then((resp) => {
+                    if (resp.data.results) {
+                        this.restaurant = resp.data.results;
+                        this.dishQuantities = this.restaurant.dishes.map(() => 0); // inizializza quantità a 0 per ogni piatto 
+                        const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
+                        cartProducts.forEach(cartProduct => {
+                            const index = this.restaurant.dishes.findIndex(dish => dish.name === cartProduct.name);
+                            if (index !== -1) {
+                                this.dishQuantities[index] = cartProduct.quantity;
+                            }
+                        });
                     } else {
-                        cartProducts.push(updatedDish);
+                        this.restaurant = [];
                     }
+                    this.isLoaded = false;
+                })
+                .catch(() => {
+                    this.restaurant = [];
+                    this.isLoaded = false;
                 });
-
-                this.selectedDishes = cartProducts;
-                this.restSlug = this.restaurant.slug;
-
-                localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
-                localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
-                this.$router.push({ name: "carrello" });
-            },
         },
-        created() {
-            this.fetchRestaurantData();
+        goToCartPage() {
+            // event.preventDefault();
+
+            const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
+
+            // console.log(cartProducts);
+            // if (cartProducts && cartProducts.length > 0) {
+            //     console.log('esiste ed è maggiore di zero');
+            //     if(cartProducts[0].restaurant_id === this.store.storeRestaurantId) {
+            //         console.log('bro sono uguali');
+            //     } else {
+            //         console.log('No bro');
+            //     }
+            // } else if (cartProducts.length == 0) {
+            //     console.log('esiste ed è uguale a zero');
+            // }
+
+            if (cartProducts.length > 0 && cartRestaurantId && cartRestaurantId !== this.restaurant.id) {
+                alert("Non puoi aggiungere prodotti da un ristorante diverso. Svuota il carrello per aggiungere nuovi prodotti.");
+                return;
+            }
+
+            const updatedDishes = this.restaurant.dishes
+                .map((dish, index) => ({
+                    ...dish,
+                    quantity: this.dishQuantities[index],
+                }))
+                .filter(dish => dish.quantity > 0);
+
+            updatedDishes.forEach(updatedDish => {
+                const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
+                if (index !== -1) {
+                    cartProducts[index] = updatedDish;
+                } else {
+                    cartProducts.push(updatedDish);
+                }
+            });
+
+            this.selectedDishes = cartProducts;
+            this.restSlug = this.restaurant.slug;
+
+            localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
+            localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
+            this.$router.push({ name: "carrello" });
         },
-    }; 
+    },
+    created() {
+        this.fetchRestaurantData();
+    },
+}; 
 </script>
 
 <template>
@@ -97,7 +114,7 @@
                 </div>
 
                 <div class="row">
-                    <form class="w-75" @submit.prevent="goToCartPage">
+                    <form class="w-75">
                         <div class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
                             v-for="(dish, index) in restaurant.dishes" :key="index">
                             <div class="d-flex justify-content-between flex-grow-1 align-items-center p-2">
@@ -118,7 +135,8 @@
                             </span>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Vai al carrello</button>
+                        <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
+                            carrello</button>
                     </form>
                 </div>
             </div>
@@ -131,15 +149,15 @@
 </template>
 
 <style scoped lang="scss">
-    .ms-cart-prod {
-        border: solid 2px orange;
-        padding: 5px 6px;
-        margin-inline: 5px;
-        width: 200px;
-    }
+.ms-cart-prod {
+    border: solid 2px orange;
+    padding: 5px 6px;
+    margin-inline: 5px;
+    width: 200px;
+}
 
-    .ms-img-product {
-        width: 70px;
-        height: 70px;
-    }
+.ms-img-product {
+    width: 70px;
+    height: 70px;
+}
 </style>
