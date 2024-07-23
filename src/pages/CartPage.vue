@@ -1,7 +1,9 @@
 <script>
+import {store} from '../store';
   export default {
     data() {
       return {
+        store,
         cartArray: [],
         slug: null,
       };
@@ -24,6 +26,18 @@
       deleteProd(index) {
         this.cartArray.splice(index, 1);
         localStorage.setItem("cartProducts", JSON.stringify(this.cartArray));
+
+        if (this.cartArray.length == 0) {
+          this.store.cardNum = 0
+          localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
+        } else {
+          this.cartArray.forEach(curQuantity => {
+            this.store.cardNum = curQuantity.quantity;
+            localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
+          });
+        }
+
+
       },
     },
     watch: {
