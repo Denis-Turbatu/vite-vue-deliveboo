@@ -69,7 +69,17 @@ export default {
 </script>
 
 <template>
-  <div v-if="!isLoaded">
+    <!-- HERO SECTION -->
+  <div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop>
+      <source
+        src="https://cdn.pixabay.com/video/2023/08/04/174561-851804290_large.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </div>
+  <!-- /HERO SECTION -->
+  <!-- <div v-if="!isLoaded"> -->
     <main>
       <div class="bg-typology">
         <div class="container">
@@ -107,8 +117,8 @@ export default {
         </div>
       </div>
     </main>
-  </div>
-  <div class="fw-bold px-3" v-else>Sta caricando</div>
+  <!-- </div> -->
+  <!-- <div class="fw-bold px-3" v-else>Sta caricando</div> -->
 </template>
 
 <style lang="scss">
