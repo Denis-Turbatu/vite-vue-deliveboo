@@ -31,14 +31,14 @@ export default {
         <!-- <a href="#" class="btn btn-link position-relative">
           <i class="fas fa-shopping-cart"></i>
         </a> -->
-        <router-link to="/carrello" class="btn btn-link position-relative">
+        <router-link :to="{name: 'carrello'}" class="btn position-relative">
           <i class="fas fa-shopping-cart custom-cart"></i>
+          <span id="ms_card-num">{{store.cardNum}}</span>
         </router-link>
-        <a href="/lavora-con-noi" class="btn btn-outline-success ms-2"
-          >Lavora con noi</a
-        >
-        <a href="/contattaci" class="btn btn-outline-warning ms-2"
-          >Contattaci</a
+        <router-link :to="{path: '/lavora-con_noi'}" class="btn btn-outline-success ms-2"
+          >Lavora con noi</router-link>
+        <router-link :to="{path: '/contattaci'}" class="btn btn-outline-warning ms-2"
+          >Contattaci</router-link
         >
       </div>
     </div>
@@ -49,6 +49,24 @@ export default {
 img {
   width: 40%;
 }
+
+#ms_card-num {
+  display: block;
+  font-size: 0.8rem;
+  width: 20px;
+  height: 20px;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  
+}
+
 .custom-cart,
 .fa-shopping-cart {
   font-size: 1.5rem;
