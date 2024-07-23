@@ -1,74 +1,74 @@
 <script>
-import axios from "axios";
-import { store } from "../store.js";
-import AppCard from "../components/AppCard.vue";
-import AppTypology from "../components/AppTypology.vue";
+  import axios from "axios";
+  import { store } from "../store.js";
+  import AppCard from "../components/AppCard.vue";
+  import AppTypology from "../components/AppTypology.vue";
 
-export default {
-  components: {
-    AppCard,
-    AppTypology,
-  },
-  data() {
-    return {
-      filters: [],
-      query: "",
-      store,
-      typology_id: "",
-      isTypology: false,
-      isLoaded: false,
-    };
-  },
-  methods: {
-    getFilters() {
-      axios.get("http://localhost:8000/api/typologies/").then((resp) => {
-        this.filters = resp.data.results;
-        this.store.typologiesArray = resp.data.results;
-      });
+  export default {
+    components: {
+      AppCard,
+      AppTypology,
     },
-    getRestaurants() {
-      this.isLoaded = true;
-      axios
-        .get("http://localhost:8000/api/restaurants/", {
-          params: { typology_id: this.typology_id, search: store.searchQuery },
-        })
-        .then((resp) => {
-          //sort() funzione JS - i ristoranti sono in ordine alfabetico n
-          this.store.restaurantsArray = resp.data.results.sort((a, b) =>
-            a.business_name.localeCompare(b.business_name)
-          );
-          this.isLoaded = false;
+    data() {
+      return {
+        filters: [],
+        query: "",
+        store,
+        typology_id: "",
+        isTypology: false,
+        isLoaded: false,
+      };
+    },
+    methods: {
+      getFilters() {
+        axios.get("http://localhost:8000/api/typologies/").then((resp) => {
+          this.filters = resp.data.results;
+          this.store.typologiesArray = resp.data.results;
         });
-    },
-    searchAction() {
-      if (this.searchQuery == "") {
-        this.getRestaurants();
-      } else {
-        this.store.searchQuery = this.query;
-        this.getRestaurants();
-      }
-    },
+      },
+      getRestaurants() {
+        this.isLoaded = true;
+        axios
+          .get("http://localhost:8000/api/restaurants/", {
+            params: { typology_id: this.typology_id, search: store.searchQuery },
+          })
+          .then((resp) => {
+            //sort() funzione JS - i ristoranti sono in ordine alfabetico n
+            this.store.restaurantsArray = resp.data.results.sort((a, b) =>
+              a.business_name.localeCompare(b.business_name)
+            );
+            this.isLoaded = false;
+          });
+      },
+      searchAction() {
+        if (this.searchQuery == "") {
+          this.getRestaurants();
+        } else {
+          this.store.searchQuery = this.query;
+          this.getRestaurants();
+        }
+      },
 
-    filterRestaurants(id) {
-      if (this.isTypology == false && this.typology_id !== id) {
-        this.typology_id = id;
-        this.isTypology = true;
-      } else if (this.isTypology == true && this.typology_id === id) {
-        this.typology_id = "";
-        this.isTypology = false;
-      } else if (this.isTypology == true && this.typology_id !== id) {
-        this.typology_id = id;
-      }
+      filterRestaurants(id) {
+        if (this.isTypology == false && this.typology_id !== id) {
+          this.typology_id = id;
+          this.isTypology = true;
+        } else if (this.isTypology == true && this.typology_id === id) {
+          this.typology_id = "";
+          this.isTypology = false;
+        } else if (this.isTypology == true && this.typology_id !== id) {
+          this.typology_id = id;
+        }
 
+        this.getRestaurants();
+      },
+    },
+    created() {
+      this.getFilters();
       this.getRestaurants();
+      this.store.cardNum = JSON.parse(localStorage.getItem('cardNumber'))
     },
-  },
-  created() {
-    this.getFilters();
-    this.getRestaurants();
-    this.store.cardNum = JSON.parse(localStorage.getItem('cardNumber'))
-  },
-};
+  };
 </script>
 
 <template>
@@ -90,10 +90,7 @@ export default {
           <h4>Scegli i tuoi piatti preferiti:</h4>
           <div class="row row-cols-3 row-cols-md-5">
             <div v-for="typObj in filters" class="col">
-              <AppTypology
-                :typologyObject="typObj"
-                @click="filterRestaurants(typObj.id)"
-              />
+              <AppTypology :typologyObject="typObj" @click="filterRestaurants(typObj.id)" />
             </div>
           </div>
         </div>
@@ -102,21 +99,9 @@ export default {
       <!-- SEARCH -->
       <div class="container">
         <div class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="text"
-            id="search"
-            name="search"
-            @keyup.enter="searchAction()"
-            v-model="query"
-            placeholder="Cerca"
-            aria-label="Search"
-          />
-          <button
-            class="btn btn-outline-success"
-            type="submit"
-            @click="searchAction()"
-          >
+          <input class="form-control me-2" type="text" id="search" name="search" @keyup.enter="searchAction()"
+            v-model="query" placeholder="Cerca" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit" @click="searchAction()">
             Cerca
           </button>
         </div>
@@ -126,10 +111,7 @@ export default {
       <div class="container">
         <h4>I ristoranti:</h4>
         <div class="row">
-          <div
-            class="col-12 col-sm-6 col-md-4"
-            v-for="restObj in store.restaurantsArray"
-          >
+          <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray">
             <AppCard :restaurantObject="restObj" />
           </div>
         </div>
@@ -140,24 +122,24 @@ export default {
 </template>
 
 <style lang="scss">
-.bg-typology {
-  background-color: rgb(227, 227, 227);
-}
+  .bg-typology {
+    background-color: rgb(227, 227, 227);
+  }
 
-// .hero-video-container {
-//   position: relative;
-//   width: 100%;
-//   height: 80vh;
-//   overflow: hidden;
-// }
+  .hero-video-container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+  }
 
-// .hero-video {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-//   transform: translate(-50%, -50%);
-// }
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
 </style>
