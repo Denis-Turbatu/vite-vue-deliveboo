@@ -8,4 +8,5 @@ export const store = reactive({
   imageBaseUrl: "http://127.0.0.1:8000/storage",
   storeRestaurantId: null,
   flagUpdating: false,
+  cardNum: 0,
 });

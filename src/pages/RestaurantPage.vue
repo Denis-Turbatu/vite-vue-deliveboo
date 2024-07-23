@@ -48,21 +48,10 @@ export default {
         },
         goToCartPage() {
             // event.preventDefault();
+            this.store.cardNum = 0;
 
             const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
             const cartRestaurantId = JSON.parse(localStorage.getItem("localStorageRestaurantId"));
-
-            // console.log(cartProducts);
-            // if (cartProducts && cartProducts.length > 0) {
-            //     console.log('esiste ed è maggiore di zero');
-            //     if(cartProducts[0].restaurant_id === this.store.storeRestaurantId) {
-            //         console.log('bro sono uguali');
-            //     } else {
-            //         console.log('No bro');
-            //     }
-            // } else if (cartProducts.length == 0) {
-            //     console.log('esiste ed è uguale a zero');
-            // }
 
             if (cartProducts.length > 0 && cartRestaurantId && cartRestaurantId !== this.store.storeRestaurantId) {
                 alert("Non puoi aggiungere prodotti da un ristorante diverso. Svuota il carrello per aggiungere nuovi prodotti.");
@@ -75,6 +64,13 @@ export default {
                     quantity: this.dishQuantities[index],
                 }))
                 .filter(dish => dish.quantity > 0);
+
+            console.log(updatedDishes);
+
+            // per vedere il numeretto nel carrello
+            updatedDishes.forEach((curElemQuantity) => {
+                this.store.cardNum += curElemQuantity.quantity;
+            })
 
             updatedDishes.forEach(updatedDish => {
                 const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
@@ -91,6 +87,7 @@ export default {
             localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
             localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
             localStorage.setItem("localStorageRestaurantId", JSON.stringify(this.store.storeRestaurantId));
+            localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
             this.$router.push({ name: "carrello" });
         },
     },
