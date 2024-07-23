@@ -56,7 +56,7 @@ import {store} from '../store';
 </script>
 
 <template>
-  <div class="container">
+  <div v-if="this.store.cardNum !== 0" class="container">
     <div class="cart my-4">
       <div class="d-flex justify-content-between">
         <h1 class="mb-4">Il tuo carrello</h1>
@@ -97,6 +97,14 @@ import {store} from '../store';
           </h3>
         </div>
       </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="container">
+      <h1 class="mb-4">Oops! Il tuo carrello è vuoto, ma il tuo stomaco non deve esserlo!</h1>
+      <span>Riempi il carrello con amore!</span> 
+      <router-link :to="{name: 'home'}" class="btn btn-success ms-3">Home</router-link>
+
     </div>
   </div>
 </template>
