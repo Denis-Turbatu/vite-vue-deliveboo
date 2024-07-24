@@ -196,6 +196,7 @@
     .quantity__plus:hover {
         background: #575b71;
         color: #fff;
+        cursor: pointer;
     }
 
     .quantity__minus {
