@@ -180,7 +180,7 @@ export default {
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Torna
                                             indietro</button>
-                                        <button @click="shakeCart" type="button" class="btn btn-primary hide.bs.modal"
+                                        <button @click="shakeCart" type="button" class="btn btn-danger hide.bs.modal"
                                             data-bs-dismiss="modal">Svuota il
                                             carrello</button>
                                     </div>
