@@ -35,8 +35,9 @@ export default {
           <i class="fas fa-shopping-cart custom-cart"></i>
           <span id="ms_card-num">{{store.cardNum}}</span>
         </router-link>
-        <router-link :to="{path: '/lavora-con_noi'}" class="btn btn-outline-success ms-2"
-          >Lavora con noi</router-link>
+          <a target="_blank" class="btn btn-outline-success ms-2" href="http://localhost:8000/">
+            Lavora con noi
+          </a>
         <router-link :to="{path: '/contattaci'}" class="btn btn-outline-warning ms-2"
           >Contattaci</router-link
         >
