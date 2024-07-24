@@ -127,7 +127,7 @@ export default {
     },
     created() {
         this.fetchRestaurantData();
-        this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber"));
+        this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber")) || 0;
     },
 };
 </script>
@@ -187,11 +187,39 @@ export default {
 
                             <!-- <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
                                 carrello</button> -->
+                            <button type="submit" class="btn btn-success mt-3 ms-auto d-block"
+                                @click.prevent="goToCartPage">Vai al
+                                carrello</button>
                         </form>
+
+                        <!-- Modal -->
+
+                        <div class="modal fade" id="modal-befor-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Non puoi aggiungere prodotti da un ristorante diverso. Svuota il carrello per
+                                        aggiungere nuovi prodotti.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Torna
+                                            indietro</button>
+                                        <button @click="shakeCart" type="button" class="btn btn-danger hide.bs.modal"
+                                            data-bs-dismiss="modal">Svuota il
+                                            carrello</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success mt-3 ms-auto d-block" @click.prevent="goToCartPage">Vai al
-                    carrello</button>
+
             </div>
         </div>
         <div v-else>
