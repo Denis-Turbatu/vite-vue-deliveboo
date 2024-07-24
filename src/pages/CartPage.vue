@@ -9,6 +9,7 @@ import {store} from '../store';
       };
     },
     methods: {
+
       getProductPrice(price, quantity) {
         return parseFloat(price * quantity).toFixed(2);
       },
