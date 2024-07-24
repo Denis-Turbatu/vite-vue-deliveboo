@@ -16,6 +16,7 @@
                 restSlug: null,
                 isLoaded: false,
                 dishQuantities: [],
+                visibleDishes: [],
             };
         },
         methods: {
@@ -27,8 +28,12 @@
                     .get(`${this.store.urlBack}/api/restaurants/${slug}`)
                     .then((resp) => {
                         if (resp.data.results) {
+                            
                             this.restaurant = resp.data.results;
-                            this.dishQuantities = this.restaurant.dishes.map(() => 0); // inizializza quantità a 0 per ogni piatto 
+                            this.visibleDishes = this.restaurant.dishes.filter((dish) => dish.visibility === 1)
+
+                            this.dishQuantities =
+                                this.visibleDishes.map(() => 0);
                             const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
                             cartProducts.forEach(cartProduct => {
                                 const index = this.restaurant.dishes.findIndex(dish => dish.name === cartProduct.name);
@@ -124,7 +129,7 @@
                 <div class="row">
                     <form class="w-75">
                         <div class="card ms-prod my-3 w-100 d-flex flex-row align-items-center justify-content-between"
-                            v-for="(dish, index) in restaurant.dishes" :key="index">
+                            v-for="(dish, index) in visibleDishes" :key="index">
                             <div class="d-flex justify-content-between flex-grow-1 align-items-center p-2">
                                 <div class="ms-1 d-flex align-items-center">
                                     <img :src="dish.thumb" class="ms-img-product rounded" alt="" />
