@@ -2,6 +2,7 @@
 import axios from "axios";
 import { store } from "../store";
 import NotFoundPage from "./NotFoundPage.vue";
+import * as bootstrap from "bootstrap";
 
 export default {
     components: {
@@ -54,41 +55,67 @@ export default {
 
             const cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
             const cartRestaurantId = JSON.parse(localStorage.getItem("localStorageRestaurantId"));
+            const cartNumber = JSON.parse(localStorage.getItem("cardNumber"));
+            this.store.cardNum = cartNumber;
 
             if (cartProducts.length > 0 && cartRestaurantId && cartRestaurantId !== this.store.storeRestaurantId) {
-                alert("Non puoi aggiungere prodotti da un ristorante diverso. Svuota il carrello per aggiungere nuovi prodotti.");
-                return;
-            }
+                console.log('apri il modale');
 
-            const updatedDishes = this.restaurant.dishes
-                .map((dish, index) => ({
-                    ...dish,
-                    quantity: this.dishQuantities[index],
-                }))
-                .filter(dish => dish.quantity > 0);
+                const modal = new bootstrap.Modal(
+                    document.getElementById('modal-befor-cart')
+                );
 
+                modal.show();
+            } else {
+                const updatedDishes = this.restaurant.dishes
+                    .map((dish, index) => ({
+                        ...dish,
+                        quantity: this.dishQuantities[index],
+                    }))
+                    .filter(dish => dish.quantity > 0);
+
+            console.log(updatedDishes);
+
+            // per vedere il numeretto nel carrello
             updatedDishes.forEach((curElemQuantity) => {
                 this.store.cardNum += curElemQuantity.quantity;
-            });
+            })
 
-            updatedDishes.forEach(updatedDish => {
-                const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
-                if (index !== -1) {
-                    cartProducts[index] = updatedDish;
-                } else {
-                    cartProducts.push(updatedDish);
-                }
-            });
+                updatedDishes.forEach(updatedDish => {
+                    const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
+                    if (index !== -1) {
+                        cartProducts[index] = updatedDish;
+                    } else {
+                        cartProducts.push(updatedDish);
+                    }
+                });
 
-            this.selectedDishes = cartProducts;
-            this.restSlug = this.restaurant.slug;
+                this.selectedDishes = cartProducts;
+                this.restSlug = this.restaurant.slug;
 
-            localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
-            localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
-            localStorage.setItem("localStorageRestaurantId", JSON.stringify(this.store.storeRestaurantId));
-            localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
-            this.$router.push({ name: "carrello" });
+                localStorage.setItem("cartProducts", JSON.stringify(this.selectedDishes));
+                localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
+                localStorage.setItem("localStorageRestaurantId", JSON.stringify(this.store.storeRestaurantId));
+                localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
+                this.$router.push({ name: "carrello" });
+            }
+
         },
+        shakeCart() {
+            console.log('svuota');
+
+            this.store.cardNum = 0;
+
+            localStorage.removeItem("cartProducts");
+            localStorage.removeItem("localStorageRestaurantId");
+            localStorage.removeItem("cardNumber");
+
+            const modal = new bootstrap.Modal(
+                document.getElementById('modal-befor-cart')
+            );
+
+            modal.hide();
+        }
         incrementCart(index) {
             this.dishQuantities[index]++;
         },
@@ -100,6 +127,7 @@ export default {
     },
     created() {
         this.fetchRestaurantData();
+        this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber"));
     },
 };
 </script>
@@ -151,8 +179,15 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <span class="d-flex justify-content-between">
+                                <input type="number" min="0" class="ms-cart-prod"
+                                    v-model.number="dishQuantities[index]" />
+                            </span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
+                            carrello</button>
+                    </form>
                 </div>
                 <button type="submit" class="btn btn-success mt-3 ms-auto d-block" @click.prevent="goToCartPage">Vai al
                     carrello</button>
