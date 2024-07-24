@@ -74,12 +74,12 @@ export default {
                     }))
                     .filter(dish => dish.quantity > 0);
 
-            console.log(updatedDishes);
+                console.log(updatedDishes);
 
-            // per vedere il numeretto nel carrello
-            updatedDishes.forEach((curElemQuantity) => {
-                this.store.cardNum += curElemQuantity.quantity;
-            })
+                // per vedere il numeretto nel carrello
+                updatedDishes.forEach((curElemQuantity) => {
+                    this.store.cardNum += curElemQuantity.quantity;
+                })
 
                 updatedDishes.forEach(updatedDish => {
                     const index = cartProducts.findIndex(cartProduct => cartProduct.name === updatedDish.name);
@@ -115,7 +115,7 @@ export default {
             );
 
             modal.hide();
-        }
+        },
         incrementCart(index) {
             this.dishQuantities[index]++;
         },
@@ -179,15 +179,16 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                            <span class="d-flex justify-content-between">
+                            <!-- <span class="d-flex justify-content-between">
                                 <input type="number" min="0" class="ms-cart-prod"
                                     v-model.number="dishQuantities[index]" />
-                            </span>
-                        </div>
+                            </span> -->
 
-                        <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
-                            carrello</button>
-                    </form>
+
+                            <!-- <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
+                                carrello</button> -->
+                        </form>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-success mt-3 ms-auto d-block" @click.prevent="goToCartPage">Vai al
                     carrello</button>
