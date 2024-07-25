@@ -1,154 +1,154 @@
 <script>
-    import axios from "axios";
-    import { store } from "../store";
-    import NotFoundPage from "./NotFoundPage.vue";
-    import * as bootstrap from "bootstrap";
+import axios from "axios";
+import { store } from "../store";
+import NotFoundPage from "./NotFoundPage.vue";
+import * as bootstrap from "bootstrap";
 
-    export default {
-        components: {
-            NotFoundPage,
-        },
-        data() {
-            return {
-                restaurant: [],
-                localStorageRestaurantId: null,
-                selectedDishes: [],
-                store,
-                restSlug: null,
-                isLoaded: false,
-                dishQuantities: [],
-                visibleDishes: [],
-            };
-        },
-        methods: {
-            fetchRestaurantData() {
-                this.isLoaded = true;
-                const slug = this.$route.params.slug;
+export default {
+    components: {
+        NotFoundPage,
+    },
+    data() {
+        return {
+            restaurant: [],
+            localStorageRestaurantId: null,
+            selectedDishes: [],
+            store,
+            restSlug: null,
+            isLoaded: false,
+            dishQuantities: [],
+            visibleDishes: [],
+        };
+    },
+    methods: {
+        fetchRestaurantData() {
+            this.isLoaded = true;
+            const slug = this.$route.params.slug;
 
-                axios
-                    .get(`${this.store.urlBack}/api/restaurants/${slug}`)
-                    .then((resp) => {
-                        if (resp.data.results) {
-                            this.restaurant = resp.data.results;
-                            this.visibleDishes = this.restaurant.dishes.filter(
-                                (dish) => dish.visibility === 1
-                            );
-
-                            this.dishQuantities = this.visibleDishes.map(() => 0);
-                            const cartProducts =
-                                JSON.parse(localStorage.getItem("cartProducts")) || [];
-                            cartProducts.forEach((cartProduct) => {
-                                const index = this.restaurant.dishes.findIndex(
-                                    (dish) => dish.name === cartProduct.name
-                                );
-                                if (index !== -1) {
-                                    this.dishQuantities[index] = cartProduct.quantity;
-                                }
-                            });
-                        } else {
-                            this.restaurant = [];
-                        }
-                        this.isLoaded = false;
-                    })
-                    .catch(() => {
-                        this.restaurant = [];
-                        this.isLoaded = false;
-                    });
-            },
-            goToCartPage() {
-                this.store.cardNum = 0;
-
-                const cartProducts =
-                    JSON.parse(localStorage.getItem("cartProducts")) || [];
-                const cartRestaurantId = JSON.parse(
-                    localStorage.getItem("localStorageRestaurantId")
-                );
-                const cartNumber = JSON.parse(localStorage.getItem("cardNumber"));
-                this.store.cardNum = cartNumber;
-
-                if (
-                    cartProducts.length > 0 &&
-                    cartRestaurantId &&
-                    cartRestaurantId !== this.store.storeRestaurantId
-                ) {
-                    console.log("apri il modale");
-
-                    const modal = new bootstrap.Modal(
-                        document.getElementById("modal-befor-cart")
-                    );
-
-                    modal.show();
-                } else {
-                    const updatedDishes = this.restaurant.dishes
-                        .map((dish, index) => ({
-                            ...dish,
-                            quantity: this.dishQuantities[index],
-                        }))
-                        .filter((dish) => dish.quantity > 0);
-
-                    console.log(updatedDishes);
-
-                    // per vedere il numeretto nel carrello
-                    updatedDishes.forEach((curElemQuantity) => {
-                        this.store.cardNum += curElemQuantity.quantity;
-                    });
-
-                    updatedDishes.forEach((updatedDish) => {
-                        const index = cartProducts.findIndex(
-                            (cartProduct) => cartProduct.name === updatedDish.name
+            axios
+                .get(`${this.store.urlBack}/api/restaurants/${slug}`)
+                .then((resp) => {
+                    if (resp.data.results) {
+                        this.restaurant = resp.data.results;
+                        this.visibleDishes = this.restaurant.dishes.filter(
+                            (dish) => dish.visibility === 1
                         );
-                        if (index !== -1) {
-                            cartProducts[index] = updatedDish;
-                        } else {
-                            cartProducts.push(updatedDish);
-                        }
-                    });
 
-                    this.selectedDishes = cartProducts;
-                    this.restSlug = this.restaurant.slug;
+                        this.dishQuantities = this.visibleDishes.map(() => 0);
+                        const cartProducts =
+                            JSON.parse(localStorage.getItem("cartProducts")) || [];
+                        cartProducts.forEach((cartProduct) => {
+                            const index = this.restaurant.dishes.findIndex(
+                                (dish) => dish.name === cartProduct.name
+                            );
+                            if (index !== -1) {
+                                this.dishQuantities[index] = cartProduct.quantity;
+                            }
+                        });
+                    } else {
+                        this.restaurant = [];
+                    }
+                    this.isLoaded = false;
+                })
+                .catch(() => {
+                    this.restaurant = [];
+                    this.isLoaded = false;
+                });
+        },
+        goToCartPage() {
+            this.store.cardNum = 0;
 
-                    localStorage.setItem(
-                        "cartProducts",
-                        JSON.stringify(this.selectedDishes)
-                    );
-                    localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
-                    localStorage.setItem(
-                        "localStorageRestaurantId",
-                        JSON.stringify(this.store.storeRestaurantId)
-                    );
-                    localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
-                    this.$router.push({ name: "carrello" });
-                }
-            },
-            shakeCart() {
-                console.log("svuota");
+            const cartProducts =
+                JSON.parse(localStorage.getItem("cartProducts")) || [];
+            const cartRestaurantId = JSON.parse(
+                localStorage.getItem("localStorageRestaurantId")
+            );
+            const cartNumber = JSON.parse(localStorage.getItem("cardNumber"));
+            this.store.cardNum = cartNumber;
 
-                this.store.cardNum = 0;
-
-                localStorage.removeItem("cartProducts");
-                localStorage.removeItem("localStorageRestaurantId");
-                localStorage.removeItem("cardNumber");
+            if (
+                cartProducts.length > 0 &&
+                cartRestaurantId &&
+                cartRestaurantId !== this.store.storeRestaurantId
+            ) {
+                console.log("apri il modale");
 
                 const modal = new bootstrap.Modal(
                     document.getElementById("modal-befor-cart")
                 );
 
-                modal.hide();
-            },
-            incrementCart(index) {
-                this.dishQuantities[index]++;
-            },
-            decrementCart(index) {
-                if (this.dishQuantities[index] > 1) {
-                    this.dishQuantities[index]--;
-                }
-            },
+                modal.show();
+            } else {
+                const updatedDishes = this.restaurant.dishes
+                    .map((dish, index) => ({
+                        ...dish,
+                        quantity: this.dishQuantities[index],
+                    }))
+                    .filter((dish) => dish.quantity > 0);
+
+                console.log(updatedDishes);
+
+                // per vedere il numeretto nel carrello
+                updatedDishes.forEach((curElemQuantity) => {
+                    this.store.cardNum += curElemQuantity.quantity;
+                });
+
+                updatedDishes.forEach((updatedDish) => {
+                    const index = cartProducts.findIndex(
+                        (cartProduct) => cartProduct.name === updatedDish.name
+                    );
+                    if (index !== -1) {
+                        cartProducts[index] = updatedDish;
+                    } else {
+                        cartProducts.push(updatedDish);
+                    }
+                });
+
+                this.selectedDishes = cartProducts;
+                this.restSlug = this.restaurant.slug;
+
+                localStorage.setItem(
+                    "cartProducts",
+                    JSON.stringify(this.selectedDishes)
+                );
+                localStorage.setItem("curSlug", JSON.stringify(this.restSlug));
+                localStorage.setItem(
+                    "localStorageRestaurantId",
+                    JSON.stringify(this.store.storeRestaurantId)
+                );
+                localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
+                this.$router.push({ name: "carrello" });
+            }
         },
-        created() {
-            this.fetchRestaurantData();
-            this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber")) || 0;
+        shakeCart() {
+            console.log("svuota");
+
+            this.store.cardNum = 0;
+
+            localStorage.removeItem("cartProducts");
+            localStorage.removeItem("localStorageRestaurantId");
+            localStorage.removeItem("cardNumber");
+
+            const modal = new bootstrap.Modal(
+                document.getElementById("modal-befor-cart")
+            );
+
+            modal.hide();
         },
-    };
+        incrementCart(index) {
+            this.dishQuantities[index]++;
+        },
+        decrementCart(index) {
+            if (this.dishQuantities[index] > 1) {
+                this.dishQuantities[index]--;
+            }
+        },
+    },
+    created() {
+        this.fetchRestaurantData();
+        this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber")) || 0;
+    },
+};
 </script>
 
 <template>
@@ -263,97 +263,98 @@
 </template>
 
 <style scoped lang="scss">
-    .ms-img-product {
-        width: 70px;
-        height: 70px;
+.ms-img-product {
+    width: 70px;
+    height: 70px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.quantity__minus,
+.quantity__plus {
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    background: #a0a0a1;
+    text-decoration: none;
+    text-align: center;
+    line-height: 23px;
+    color: #fff;
+}
+
+.quantity__minus:hover,
+.quantity__plus:hover {
+    background: #575b71;
+    color: #fff;
+    cursor: pointer;
+}
+
+.quantity__minus {
+    border-radius: 3px 0 0 3px;
+}
+
+.quantity__plus {
+    border-radius: 0 3px 3px 0;
+}
+
+.quantity__input {
+    width: 30px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border-top: 2px solid #a0a0a1;
+    border-bottom: 2px solid #a0a0a1;
+    border-left: 1px solid #a0a0a1;
+    border-right: 2px solid #a0a0a1;
+    background: #fff;
+    color: black;
+}
+
+.quantity__minus:link,
+.quantity__plus:link {
+    color: #fff;
+}
+
+.quantity__minus:visited,
+.quantity__plus:visited {
+    color: #fff;
+}
+
+.btn-outline-warning:hover {
+    color: white
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 24px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
     }
 
-    .quantity {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
+    100% {
+        transform: rotate(360deg);
     }
-
-    .quantity__minus,
-    .quantity__plus {
-        display: block;
-        width: 25px;
-        height: 25px;
-        margin: 0;
-        background: #a0a0a1;
-        text-decoration: none;
-        text-align: center;
-        line-height: 23px;
-        color: #fff;
-    }
-
-    .quantity__minus:hover,
-    .quantity__plus:hover {
-        background: #575b71;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .quantity__minus {
-        border-radius: 3px 0 0 3px;
-    }
-
-    .quantity__plus {
-        border-radius: 0 3px 3px 0;
-    }
-
-    .quantity__input {
-        width: 30px;
-        height: 25px;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        border-top: 2px solid #a0a0a1;
-        border-bottom: 2px solid #a0a0a1;
-        border-left: 1px solid #a0a0a1;
-        border-right: 2px solid #a0a0a1;
-        background: #fff;
-        color: black;
-    }
-
-    .quantity__minus:link,
-    .quantity__plus:link {
-        color: #fff;
-    }
-
-    .quantity__minus:visited,
-    .quantity__plus:visited {
-        color: #fff;
-    }
-
-    .btn-outline-warning:hover {
-        color: white
-    }
-    .loading-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        font-size: 24px;
-    }
-
-    .loader {
-        border: 16px solid #f3f3f3;
-        border-top: 16px solid #3498db;
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
+}
 </style>
