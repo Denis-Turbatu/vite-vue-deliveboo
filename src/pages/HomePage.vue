@@ -112,7 +112,7 @@
 
     <!-- RESTAURANTS SECTION -->
     <div class="container py-4">
-      <h4>I ristoranti:</h4>
+      <h4>Ristoranti:</h4>
       <div class="row">
         <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray" :key="restObj.id">
           <AppCard :restaurantObject="restObj" />

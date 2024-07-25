@@ -1,66 +1,75 @@
 <script>
-import {store} from '../store';
+import { store } from "../store";
 
 export default {
-    props: {
-        restaurantObject: Object,
-    },
-    data() {
-        return {
-            store,
-        }
-    },
-    methods: {
-        // goToRestaurantPage() {
-        //     this.$router.push({ name: 'Ristorante', params: { name: this.restaurantObject.business_name } });
-        // }
-    }
-}
+  props: {
+    restaurantObject: Object,
+  },
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    // goToRestaurantPage() {
+    //     this.$router.push({ name: 'Ristorante', params: { name: this.restaurantObject.business_name } });
+    // }
+  },
+};
 </script>
 
 <template>
-    <router-link 
-        :to="{name: 'ristorante', params: {slug: restaurantObject.slug}}" 
-        @click="store.storeRestaurantId = restaurantObject.id" 
-        class="card ms-height text-decoration-none mb-3"
-    >
-        <img :src="restaurantObject.image" class="card-img-top" alt="Immagine del ristorante">
-        <div class="card-body text-center">
-            <h3 class="card-title font-weight-bold">{{ restaurantObject.business_name }}</h3>
-            <p class="card-text"><span class="badge badge-primary">{{ restaurantObject.typologies[0].name }}</span></p>
-        </div>
-    </router-link>
+  <router-link
+    :to="{ name: 'ristorante', params: { slug: restaurantObject.slug } }"
+    @click="store.storeRestaurantId = restaurantObject.id"
+    class="card ms-height text-decoration-none mb-3"
+  >
+    <img
+      :src="restaurantObject.image"
+      class="card-img-top"
+      alt="Immagine del ristorante"
+    />
+    <div class="card-body">
+      <h4 class="card-title font-weight-bold ">
+        {{ restaurantObject.business_name }}
+      </h4>
+      <p class="card-text text-end">
+        <span class="badge badge-primary mt-2">{{
+          restaurantObject.typologies[0].name
+        }}</span>
+      </p>
+    </div>
+  </router-link>
 </template>
 
 <style scoped lang="scss">
 .card {
-    margin: 10px;
-    width: 100%;
+  margin: 10px;
+  width: 100%;
+  height: 280px;
 }
 .card-img-top {
-    height: 150px;
-    object-fit: cover;
+  height: 150px;
+  object-fit: cover;
 }
 .ms-height {
-    max-height: 300px;
-    min-height: 0px;
+  max-height: 300px;
+  min-height: 0px;
 }
-.card-body {
-    text-align: center;
-}
+
 .badge {
-    display: inline-block;
-    padding: .25em .4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25rem;
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
 }
 .badge-primary {
-    color: #fff;
-    background-color: #ffc107;
+  color: #fff;
+  background-color: #ffc107;
 }
 </style>

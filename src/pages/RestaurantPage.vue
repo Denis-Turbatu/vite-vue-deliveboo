@@ -164,7 +164,9 @@
                 <div class="row g-2 mb-5">
                     <div class="col-12 col-lg-8">
                         <h1 class="display-4">{{ restaurant.business_name }}</h1>
-                        <h3>{{ restaurant.address }}</h3>
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                             {{ restaurant.address }}</span>
                     </div>
                 </div>
 
