@@ -54,6 +54,7 @@ import {store} from '../store';
     created() {
       this.cartArray = JSON.parse(localStorage.getItem("cartProducts")) || [];
       this.slug = JSON.parse(localStorage.getItem("curSlug"));
+      this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber")) || 0;
       this.cartArray.forEach(product => {
         const newProduct = {
           dish_id: product.id,
