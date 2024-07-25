@@ -73,7 +73,9 @@ import {store} from '../store';
       <div class="d-flex justify-content-between">
         <h1 class="mb-4">Il tuo carrello</h1>
         <router-link :to="`/ristorante/${slug}`">
-          <button class="btn btn-outline-primary">Torna al Menu</button>
+          <button class="btn text-warning">Torna al Menu
+            <i class="fa-solid fa-utensils"></i>
+          </button>
         </router-link>
       </div>
       <div class="row">

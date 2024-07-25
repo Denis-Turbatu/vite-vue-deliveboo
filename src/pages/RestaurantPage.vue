@@ -137,7 +137,10 @@ export default {
         <div v-if="restaurant && restaurant.id">
             <div class="container my-5">
                 <div class="mb-3">
-                    <router-link :to="{ name: 'home' }" class="btn btn-primary">Indietro</router-link>
+                    <router-link :to="{ name: 'home' }" class="btn text-warning"> 
+                        <i class="fa-solid fa-house"></i>
+                        Torna indietro
+                    </router-link>
                 </div>
                 <div class="row g-2 mb-5">
                     <div class="col-12 col-lg-8">
