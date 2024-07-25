@@ -1,6 +1,11 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "bootstrap/scss/bootstrap";
 
+
+a{
+    text-decoration: none;
+}
+
 //Form
 .form-control:focus{
     box-shadow: 0 0 0 0.25rem #ffc107;

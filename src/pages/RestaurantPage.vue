@@ -156,17 +156,17 @@
         <div v-if="restaurant && restaurant.id">
             <div class="container my-5">
                 <div class="mb-3">
-                    <router-link :to="{ name: 'home' }" class="btn text-warning">
+                    <router-link :to="{ name: 'home' }" class="text-warning">
                         <i class="fa-solid fa-house"></i>
                         Torna indietro
                     </router-link>
-                </div>
-                <div class="row g-2 mb-5">
+                    <div class="row g-2 mb-5">
+                    </div>
                     <div class="col-12 col-lg-8">
                         <h1 class="display-4">{{ restaurant.business_name }}</h1>
                         <span>
                             <i class="fa-solid fa-location-dot"></i>
-                             {{ restaurant.address }}</span>
+                            {{ restaurant.address }}</span>
                     </div>
                 </div>
 
@@ -326,7 +326,7 @@
     }
 
     // INPUT
-    .btn-outline-warning:hover{
-  color:white
-}
+    .btn-outline-warning:hover {
+        color: white
+    }
 </style>
