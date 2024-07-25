@@ -1,11 +1,3 @@
-<template>
-    <div>
-        <div id="dropin-container"></div>
-        <button @click="handlePayment" class="button button--small button--green">Purchase</button>
-        <div v-html="checkoutMessage"></div>
-    </div>
-</template>
-
 <script>
     import axios from 'axios';
 
@@ -64,7 +56,7 @@
                         }
 
                         axios.post('http://localhost:8000/api/orders/checkout', {
-                            amount: 1,
+                            dish_id: 1,
                             paymentMethodNonce: fake-valid-mastercard-nonce,
                         })
                             .then(response => {
@@ -87,6 +79,14 @@
         }
     };
 </script>
+
+<template>
+    <div class="container">
+        <div id="dropin-container"></div>
+        <button @click="handlePayment" class="button button--small button--green">Purchase</button>
+        <div v-html="checkoutMessage"></div>
+    </div>
+</template>
 
 <style scoped>
     .button {
