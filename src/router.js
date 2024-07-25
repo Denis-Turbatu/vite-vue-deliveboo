@@ -29,6 +29,7 @@ const router = createRouter({
       path: "/pagamento",
       name: "pagamento",
       component: PaymentPage,
+      props: true
     },
     {
       //qualsiasi rotta tranne quelli specificati sopra

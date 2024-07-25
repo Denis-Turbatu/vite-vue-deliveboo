@@ -6,6 +6,7 @@ import {store} from '../store';
         store,
         cartArray: [],
         slug: null,
+        paymentArray: [],
       };
     },
     methods: {
@@ -37,9 +38,10 @@ import {store} from '../store';
             localStorage.setItem("cardNumber", JSON.stringify(this.store.cardNum));
           });
         }
-
-
       },
+      savePaymentData(){
+        localStorage.setItem('paymentData', JSON.stringify(this.paymentArray))
+      }
     },
     watch: {
       cartArray: {
@@ -52,6 +54,14 @@ import {store} from '../store';
     created() {
       this.cartArray = JSON.parse(localStorage.getItem("cartProducts")) || [];
       this.slug = JSON.parse(localStorage.getItem("curSlug"));
+      this.cartArray.forEach(product => {
+        const newProduct = {
+          dish_id: product.id,
+          quantity: product.quantity,
+        }
+      this.paymentArray.push(newProduct);
+      });
+      console.log(this.paymentArray);
     },
   }; 
 </script>
@@ -92,7 +102,9 @@ import {store} from '../store';
             </div>
           </div>
         </div>
-        <div class="col-12 text-end">
+        <div class="col-12 d-flex justify-content-between">
+          <router-link :to="{name: 'pagamento'}" class="btn btn-success ms-3" @click="savePaymentData()">Vai al pagamento</router-link>
+
           <h3>
             Totale: <span>{{ getOrderPrice() }}</span>€
           </h3>
