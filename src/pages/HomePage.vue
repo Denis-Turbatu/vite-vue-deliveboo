@@ -61,7 +61,7 @@ export default {
   created() {
     this.getFilters();
     this.getRestaurants();
-    this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber"));
+    this.store.cardNum = JSON.parse(localStorage.getItem("cardNumber")) || 0;
   },
 };
 </script>
