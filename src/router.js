@@ -4,6 +4,7 @@ import CartPage from "./pages/CartPage.vue";
 import RestaurantPage from "./pages/RestaurantPage.vue";
 import PaymentPage from "./pages/PaymentPage.vue";
 import NotFoundPage from "./pages/NotFoundPage.vue";
+import OrderDetailsPage from "./pages/OrderDetailsPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,6 +24,12 @@ const router = createRouter({
       path: "/ristorante/:slug",
       name: "ristorante",
       component: RestaurantPage,
+      props: true
+    },
+    {
+      path: "/spedizione",
+      name: "spedizione",
+      component: OrderDetailsPage,
       props: true
     },
     {

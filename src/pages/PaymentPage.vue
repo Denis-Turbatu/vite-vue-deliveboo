@@ -8,7 +8,7 @@
             return {
                 dropinInstance: null,
                 store,
-                tokenizationKey: '', // Inserisci qui la tua chiave di tokenizzazione
+                tokenizationKey: '',
                 payData: [],
             };
         },
@@ -46,7 +46,7 @@
 
                     try {
                         const response = await axios.post('http://localhost:8000/api/orders/checkout', { 
-                            json_data: localStorage.getItem('paymentData'),
+                            json_data: localStorage.getItem('productsData'),
                             token: payload.nonce 
                         });
 
@@ -87,13 +87,14 @@
 </script>
 
 <template>
-    <div id="dropin-wrapper">
-        <div id="checkout-message"></div>
-        <div id="dropin-container"></div>
-        <button id="submit-button" @click="submitPayment">Submit payment</button>
+    <div class="container">
+        <div id="dropin-wrapper">
+            <div id="checkout-message"></div>
+            <div id="dropin-container"></div>
+            <button id="submit-button" @click="submitPayment">Submit payment</button>
+        </div>
     </div>
 </template>
 
 <style scoped>
-    /* Aggiungi qui i tuoi stili personalizzati */
 </style>
