@@ -189,13 +189,13 @@
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="fw-bold">{{ dish.price }}€</span>
                                                 <div class="input-group input-group-sm ms-auto" style="width: 100px">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button"
+                                                    <button class="btn btn-outline-warning btn-sm" type="button"
                                                         @click.prevent="decrementCart(index)">
                                                         -
                                                     </button>
                                                     <input type="text" class="form-control text-center"
                                                         v-model.number="dishQuantities[index]" readonly />
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button"
+                                                    <button class="btn btn-outline-warning btn-sm" type="button"
                                                         @click.prevent="incrementCart(index)">
                                                         +
                                                     </button>
@@ -322,4 +322,9 @@
     .quantity__plus:visited {
         color: #fff;
     }
+
+    // INPUT
+    .btn-outline-warning:hover{
+  color:white
+}
 </style>

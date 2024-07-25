@@ -126,7 +126,7 @@ export default {
                       style="width: 100px"
                     >
                       <button
-                        class="btn btn-outline-secondary btn-sm"
+                        class="btn btn-outline-warning btn-sm"
                         type="button"  @click.prevent="decrementCart(index)"
                       >
                         -
@@ -138,7 +138,7 @@ export default {
                         readonly
                       />
                       <button
-                        class="btn btn-outline-secondary btn-sm"
+                        class="btn btn-outline-warning btn-sm"
                         type="button"  @click.prevent="incrementCart(index)"
                       >
                         +
@@ -188,5 +188,8 @@ export default {
   padding: 5px 6px;
   margin-inline: 5px;
   width: 70px;
+}
+.btn-outline-warning:hover{
+  color:white
 }
 </style>
