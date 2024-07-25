@@ -6,7 +6,7 @@ import {store} from '../store';
         store,
         cartArray: [],
         slug: null,
-        paymentArray: [],
+        productsArray: [],
       };
     },
     methods: {
@@ -39,8 +39,8 @@ import {store} from '../store';
           });
         }
       },
-      savePaymentData(){
-        localStorage.setItem('paymentData', JSON.stringify(this.paymentArray))
+      saveProductsData(){
+        localStorage.setItem('productsData', JSON.stringify(this.productsArray));
       }
     },
     watch: {
@@ -60,9 +60,9 @@ import {store} from '../store';
           dish_id: product.id,
           quantity: product.quantity,
         }
-      this.paymentArray.push(newProduct);
+      this.productsArray.push(newProduct);
       });
-      console.log(this.paymentArray);
+      console.log(this.productsArray);
     },
   }; 
 </script>
@@ -104,7 +104,7 @@ import {store} from '../store';
           </div>
         </div>
         <div class="col-12 d-flex justify-content-between">
-          <router-link :to="{name: 'pagamento'}" class="btn btn-success ms-3" @click="savePaymentData()">Vai al pagamento</router-link>
+          <router-link :to="{name: 'spedizione'}" class="btn btn-success ms-3" @click="saveProductsData()">Procedi all'ordine</router-link>
 
           <h3>
             Totale: <span>{{ getOrderPrice() }}</span>€
