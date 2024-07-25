@@ -1,19 +1,13 @@
-<template>
-    <div id="dropin-wrapper">
-        <div id="checkout-message"></div>
-        <div id="dropin-container"></div>
-        <button id="submit-button" @click="submitPayment">Submit payment</button>
-    </div>
-</template>
-
 <script>
     import axios from 'axios';
+    import {store} from '../store'
 
     export default {
         name: 'PaymentPage',
         data() {
             return {
                 dropinInstance: null,
+                store,
                 tokenizationKey: '', // Inserisci qui la tua chiave di tokenizzazione
                 payData: [],
             };
@@ -66,7 +60,13 @@
                         });
 
                         if (response.data.success) {
-                            document.getElementById('checkout-message').innerHTML = '<h1>Successo</h1><p>L\'interfaccia Drop-in funziona! Controlla il tuo <a href="https://sandbox.braintreegateway.com/login">pannello di controllo sandbox</a> per le tue transazioni di prova.</p><p>Aggiorna per provare un\'altra transazione.</p>';
+                            document.getElementById('checkout-message').innerHTML = '<h1>Successo</h1><p>'
+                            this.store.cardNum = 0;
+                            // JSON.parse(localStorage.setItem('cartProducts', []));
+                            // JSON.parse(localStorage.setItem('cardNumber', this.store.cardNum));
+                            // JSON.parse(localStorage.setItem('paymentData', []));
+                            localStorage.clear();
+                            this.$router.push({ name: "home" });
                         } else {
                             console.error(response.data);
                             document.getElementById('checkout-message').innerHTML = '<h1>Errore</h1><p>Controlla la console.</p>';
@@ -85,6 +85,14 @@
         },
     };
 </script>
+
+<template>
+    <div id="dropin-wrapper">
+        <div id="checkout-message"></div>
+        <div id="dropin-container"></div>
+        <button id="submit-button" @click="submitPayment">Submit payment</button>
+    </div>
+</template>
 
 <style scoped>
     /* Aggiungi qui i tuoi stili personalizzati */
