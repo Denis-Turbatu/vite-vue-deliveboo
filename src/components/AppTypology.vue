@@ -26,6 +26,7 @@ export default {
   background-color: #ffffff; /* Sfondo bianco di default */
   border: 1px solid #dc3545; /* Colore del bordo di default per btn-outline-danger */
   color: #dc3545; /* Colore del testo di default */
+  z-index: 9999;
 }
 
 .custom-button-typology:hover,
