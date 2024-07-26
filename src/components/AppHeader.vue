@@ -53,7 +53,7 @@ export default {
             >Lavora con noi</a
           >
           <router-link
-            :to="{ path: '/contattaci' }"
+            :to="{ name: 'contattaci' }"
             class="btn btn-outline-warning ms-lg-2 my-2 my-lg-0"
             >Contattaci</router-link
           >
