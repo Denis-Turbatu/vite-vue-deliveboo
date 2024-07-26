@@ -5,6 +5,8 @@ import RestaurantPage from "./pages/RestaurantPage.vue";
 import PaymentPage from "./pages/PaymentPage.vue";
 import NotFoundPage from "./pages/NotFoundPage.vue";
 import OrderDetailsPage from "./pages/OrderDetailsPage.vue";
+import ContactUs from "./pages/ContactUs.vue";
+import ThankYouPage from "./pages/ThankYouPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -36,6 +38,18 @@ const router = createRouter({
       path: "/pagamento",
       name: "pagamento",
       component: PaymentPage,
+      props: true
+    },
+    {
+      path: "/successo",
+      name: "successo",
+      component: ThankYouPage,
+      props: true
+    },
+    {
+      path: "/contattaci",
+      name: "contattaci",
+      component: ContactUs,
       props: true
     },
     {
