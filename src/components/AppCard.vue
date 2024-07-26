@@ -22,7 +22,7 @@ export default {
   <router-link
     :to="{ name: 'ristorante', params: { slug: restaurantObject.slug } }"
     @click="store.storeRestaurantId = restaurantObject.id"
-    class="card ms-height text-decoration-none mb-3"
+    class="card ms-height text-decoration-none mb-2"
   >
     <img
       :src="restaurantObject.image"
@@ -45,7 +45,7 @@ export default {
 <style scoped lang="scss">
 .card {
   margin: 10px;
-  width: 100%;
+  width: 95%;
   height: 280px;
 }
 .card-img-top {
