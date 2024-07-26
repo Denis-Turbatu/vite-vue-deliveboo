@@ -80,7 +80,7 @@
         'background-position': 'bottom'
       }">
       <div class="hero-text text-white">
-        <h2>SCEGLI I TUOI PIATTI PREFERITI &hearts;</h2>
+        <h3>SCEGLI I TUOI PIATTI PREFERITI &hearts;</h3>
         <span>Tu ordini noi arriviamo in un DeliveBoo!</span>
       </div>
       <div class="search-container">
@@ -124,6 +124,10 @@
 </template>
 
 <style lang="scss">
+
+main{
+  overflow-y: hidden;
+}
   .typology-text {
     z-index: 9999;
     background-color: white;
