@@ -1,6 +1,6 @@
 <script>
     import axios from 'axios';
-    import {store} from '../store'
+    import { store } from '../store'
 
     export default {
         name: 'PaymentPage',
@@ -45,9 +45,9 @@
                     }
 
                     try {
-                        const response = await axios.post('http://localhost:8000/api/orders/checkout', { 
+                        const response = await axios.post('http://localhost:8000/api/orders/checkout', {
                             json_data: localStorage.getItem('productsData'),
-                            token: payload.nonce 
+                            token: payload.nonce
                         });
 
                         this.dropinInstance.teardown(teardownErr => {
@@ -62,9 +62,14 @@
                         if (response.data.success) {
                             document.getElementById('checkout-message').innerHTML = '<h1>Successo</h1><p>'
                             this.store.cardNum = 0;
-                            // JSON.parse(localStorage.setItem('cartProducts', []));
-                            // JSON.parse(localStorage.setItem('cardNumber', this.store.cardNum));
-                            // JSON.parse(localStorage.setItem('paymentData', []));
+
+                            const userData = localStorage.getItem('userData');
+                            const productsData = localStorage.getItem('productsData');
+                            axios.post('http://localhost:8000/api/save', {
+                                user: userData,
+                                products: productsData,
+                            });
+
                             localStorage.clear();
                             this.$router.push({ name: "home" });
                         } else {

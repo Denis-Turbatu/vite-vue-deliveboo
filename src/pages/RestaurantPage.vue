@@ -325,7 +325,7 @@
         color: #fff;
     }
 
-    // INPUT
+    /* // INPUT */
     .btn-outline-warning:hover{
   color:white
 }
