@@ -348,7 +348,7 @@ export default {
     animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
+/* @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
@@ -413,5 +413,5 @@ export default {
     .btn-outline-warning:hover{
     color:white
     }
-}
+} */
 </style>
