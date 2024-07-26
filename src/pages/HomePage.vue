@@ -79,9 +79,9 @@
         'background-size': 'cover',
         'background-position': 'bottom'
       }">
-      <div class="hero-text">
+      <div class="hero-text text-white">
         <h2>SCEGLI I TUOI PIATTI PREFERITI &hearts;</h2>
-        <p>Tu ordini noi arriviamo in un DeliveBoo!</p>
+        <span>Tu ordini noi arriviamo in un DeliveBoo!</span>
       </div>
       <div class="search-container">
         <input class="form-control me-2" type="text" id="search" name="search" @keyup.enter="searchAction()"
@@ -111,7 +111,7 @@
     <!-- /TYPOLOGIES SECTION -->
 
     <!-- RESTAURANTS SECTION -->
-    <div class="container py-4">
+    <div class="container py-3">
       <h4>Ristoranti:</h4>
       <div class="row">
         <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray" :key="restObj.id">
@@ -169,9 +169,9 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translateY(-50%);
-    max-width: 40%;
-    background-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-60%);
+    max-width: 60%;
+    // background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 5px;
   }
@@ -190,4 +190,6 @@
     padding: 10px;
     border-radius: 5px;
   }
+
+  // HERO
 </style>
