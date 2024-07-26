@@ -348,7 +348,7 @@ export default {
     animation: spin 2s linear infinite;
 }
 
-/* @keyframes spin {
+@keyframes spin {
     0% {
         transform: rotate(0deg);
     }
@@ -356,62 +356,5 @@ export default {
     100% {
         transform: rotate(360deg);
     }
-
-    .quantity__minus,
-    .quantity__plus {
-        display: block;
-        width: 25px;
-        height: 25px;
-        margin: 0;
-        background: #a0a0a1;
-        text-decoration: none;
-        text-align: center;
-        line-height: 23px;
-        color: #fff;
-    }
-
-    .quantity__minus:hover,
-    .quantity__plus:hover {
-        background: #575b71;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .quantity__minus {
-        border-radius: 3px 0 0 3px;
-    }
-
-    .quantity__plus {
-        border-radius: 0 3px 3px 0;
-    }
-
-    .quantity__input {
-        width: 30px;
-        height: 25px;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        border-top: 2px solid #a0a0a1;
-        border-bottom: 2px solid #a0a0a1;
-        border-left: 1px solid #a0a0a1;
-        border-right: 2px solid #a0a0a1;
-        background: #fff;
-        color: black;
-    }
-
-    .quantity__minus:link,
-    .quantity__plus:link {
-        color: #fff;
-    }
-
-    .quantity__minus:visited,
-    .quantity__plus:visited {
-        color: #fff;
-    }
-
-    // INPUT
-    .btn-outline-warning:hover{
-    color:white
-    }
-} */
+}
 </style>
