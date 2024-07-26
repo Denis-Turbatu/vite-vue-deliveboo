@@ -160,29 +160,32 @@ export default {
                         <i class="fa-solid fa-house"></i>
                         Torna indietro
                     </router-link>
-                    <div class="row g-2 mb-5">
-                    </div>
+                    <div class="row g-2 mb-5"></div>
                     <div class="col-12 col-lg-8">
                         <h1 class="display-4">{{ restaurant.business_name }}</h1>
                         <span>
                             <i class="fa-solid fa-location-dot"></i>
-                            {{ restaurant.address }}</span>
+                            {{ restaurant.address }}
+                        </span>
                     </div>
                 </div>
 
                 <div class="row g-2">
-                    <div class="col-12 col-lg-4">
+                    <!-- IMMAGINE DEL RISTORANTE -->
+                    <div class="col-12 col-lg-4 mb-5">
                         <img class="img-fluid rounded shadow" :src="restaurant.image" alt="Immagine ristorante" />
                     </div>
                     <div class="col-12 col-lg-8" style="height: 500px; overflow-y: auto">
                         <form>
                             <div class="card mb-3 shadow-sm" v-for="(dish, index) in visibleDishes" :key="index">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
+                                <div class="row g-0 align-items-center">
+                                    <!-- IMMAGINE DEL PIATTO -->
+                                    <div class="col-4 col-md-2">
                                         <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto"
                                             style="width: 150px; height: 150px" />
                                     </div>
-                                    <div class="col-md-8">
+                                    <!-- CARD DEL PIATTO -->
+                                    <div class="col-8 col-md-10">
                                         <div class="card-body d-flex flex-column justify-content-between h-100">
                                             <div>
                                                 <h5 class="card-title">{{ dish.name }}</h5>
@@ -221,7 +224,6 @@ export default {
                         </form>
 
                         <!-- Modal -->
-
                         <div class="modal fade" id="modal-befor-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -328,7 +330,7 @@ export default {
 }
 
 .btn-outline-warning:hover {
-    color: white
+    color: white;
 }
 
 .loading-container {
@@ -341,7 +343,7 @@ export default {
 
 .loader {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #ffc107;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -355,6 +357,28 @@ export default {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* Media query to handle smaller screens */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .card .col-4,
+    .card .col-8 {
+        flex: 1 0 auto;
+        max-width: 100%;
+    }
+
+    .card .col-4 {
+        padding-right: 15px;
+    }
+
+    .card .col-8 {
+        padding-left: 15px;
     }
 }
 </style>
