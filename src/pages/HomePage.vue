@@ -159,41 +159,61 @@ main{
   }
 
   .hero-image-container {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    background-size: cover;
-    background-position: bottom;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  background-size: cover;
+  background-position: bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* Ensure the image is responsive */
+  @media (max-width: 950px) {
+    height: 40vh;
+    background-position: center;
+
+    .hero-text{
+      font-size: 1.25rem;
+    }
   }
 
-  .hero-text {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateY(-60%);
-    max-width: 60%;
-    // background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 5px;
+  @media (max-width: 480px) {
+    height: 30vh;
+    background-position: top;
+    
+    .hero-text{
+      font-size: 1rem;
+    }
   }
+}
 
-  .search-container {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 70%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: rgba(255, 255, 255, 0.479);
-    padding: 10px;
-    border-radius: 5px;
-  }
+.hero-text {
+  position: absolute;
+  left: 60%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  padding: 20px;
+  color: white;
+  text-align: right;
+  font-size: 1.5rem;
+}
 
-  // HERO
+.search-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 70%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.479);
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
 </style>
