@@ -90,6 +90,7 @@ export default {
 
                 // per vedere il numeretto nel carrello
                 updatedDishes.forEach((curElemQuantity) => {
+                    this.store.cardNum = 0;
                     this.store.cardNum += curElemQuantity.quantity;
                 });
 
@@ -230,7 +231,7 @@ export default {
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                            Modal title
+                                            Carrello Esistente
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
