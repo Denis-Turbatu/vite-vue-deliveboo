@@ -10,38 +10,75 @@
 </script>
 
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="my-5">
-                <h1>Siamo qui per aiutarti!</h1>
-                <h5>Mandaci una mail e ti risponderemo il prima possibile, oppure puoi contattarci telefonicamente</h5>
-
-            </div>
-            <div class="d-flex">
-                <div class="email">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Indirizzo Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <div class="container mt-5">
+        <h1>Siamo qui per aiutarti!</h1>
+        <div class="row ">
+            <!-- First Row - 2 cards -->
+            <div class="col-md-6 mb-4" >
+                <div class="card" style="width: 18rem;">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Omar Ndiaye</h5>
+                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label"></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-    
                 </div>
-                <div class="phone">
-                    <h6>+39 333 444 8888</h6>
-                </div>
-
             </div>
-
+            <div class="col-md-6 mb-4" >
+                <div class="card" style="width: 18rem;">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Denis Turbatu</h5>
+                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
+        <div class="row justify-content-center">
+            <!-- Second Row - 1 card centered -->
+            <div class="col-md-6 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gessica Calcagno</h5>
+                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Third Row - 2 cards -->
+            <div class="col-md-6 mb-4">
+                <div class="card" style="width: 18rem;"> 
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Constantin Irina</h5>
+                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 5">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Matteo Cenci</h5>
+                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 
 <style scoped lang="scss">
+.container{
+    margin: 0 auto;
+}
 
 .email {
     width: 50%;
