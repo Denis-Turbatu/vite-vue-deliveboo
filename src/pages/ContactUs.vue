@@ -10,12 +10,12 @@
 </script>
 
 <template>
-    <div class="container mt-5">
+    <div class="container p-3 me-4">
         <h1>Siamo qui per aiutarti!</h1>
         <div class="row ">
             <!-- First Row - 2 cards -->
             <div class="col-md-6 mb-4" >
-                <div class="card" style="width: 18rem;">
+                <div class="card me-3" style="width: 20rem;">
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">Omar Ndiaye</h5>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-4" >
-                <div class="card" style="width: 18rem;">
+                <div class="card me-3" style="width: 20rem;">
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 2">
                     <div class="card-body text-center">
                         <h5 class="card-title">Denis Turbatu</h5>
@@ -38,7 +38,7 @@
         <div class="row justify-content-center">
             <!-- Second Row - 1 card centered -->
             <div class="col-md-6 mb-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card me-3" style="width: 20rem;">
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 3">
                     <div class="card-body text-center">
                         <h5 class="card-title">Gessica Calcagno</h5>
@@ -51,7 +51,7 @@
         <div class="row">
             <!-- Third Row - 2 cards -->
             <div class="col-md-6 mb-4">
-                <div class="card" style="width: 18rem;"> 
+                <div class="card me-3" style="width: 20rem;"> 
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 4">
                     <div class="card-body text-center">
                         <h5 class="card-title">Constantin Irina</h5>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card me-3" style="width: 20rem;">
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 5">
                     <div class="card-body text-center">
                         <h5 class="card-title">Matteo Cenci</h5>
