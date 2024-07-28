@@ -144,6 +144,13 @@ export default {
                 this.dishQuantities[index]--;
             }
         },
+        // Da RIVEDERE <------------------------------------------------------------------
+        // getImageUrl(imagePath) {
+        //     if (!imagePath.startsWith('http') && !imagePath.startsWith('/storage')) {
+        //         return `${this.store.imageBaseUrl}/${imagePath}`;
+        //     }
+        //     return imagePath;
+        // },
     },
     created() {
         this.fetchRestaurantData();
@@ -174,7 +181,9 @@ export default {
                 <div class="row g-2">
                     <!-- IMMAGINE DEL RISTORANTE -->
                     <div class="col-12 col-lg-4 mb-5">
-                        <img class="img-fluid rounded shadow" :src="restaurant.image" alt="Immagine ristorante" />
+                        <!-- <p>{{ restaurant.post_images }}</p> -->
+                        <img class="img-fluid rounded shadow" :src="restaurant.image" alt="Immagine ristorante" v-if="!restaurant.image.includes('post_images')"/>
+                        <img class="img-fluid rounded shadow" :src="`${store.imageBaseUrl}/${restaurant.image}`" alt="Immagine ristorante" v-else/>
                     </div>
                     <div class="col-12 col-lg-8" style="height: 500px; overflow-y: auto">
                         <form>
@@ -182,7 +191,9 @@ export default {
                                 <div class="row g-0 align-items-center">
                                     <!-- IMMAGINE DEL PIATTO -->
                                     <div class="col-4 col-md-2">
-                                        <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto"
+                                        <!-- <img :src="getImageUrl(dish.thumb)" class="img-fluid rounded-start" alt="Immagine piatto"
+                                            style="width: 150px; height: 150px" /> -->
+                                            <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto"
                                             style="width: 150px; height: 150px" />
                                     </div>
                                     <!-- CARD DEL PIATTO -->
