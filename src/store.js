@@ -9,4 +9,8 @@ export const store = reactive({
   storeRestaurantId: null,
   flagUpdating: false,
   cardNum: 0,
+  thread_id: '',
+  chat: [],
+  mesUser: '',
+  chatIsOpen: false
 });
