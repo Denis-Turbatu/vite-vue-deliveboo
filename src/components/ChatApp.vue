@@ -134,12 +134,14 @@ export default {
       background-color: rgb(196, 239, 135);
       padding: 10px;
       border-radius: 10px;
+      padding-bottom: 20px;
     }
 
     .send {
       background-color: rgb(255, 255, 255);
       padding: 10px;
       border-radius: 10px;
+      padding-bottom: 20px;
     }
   }
 
