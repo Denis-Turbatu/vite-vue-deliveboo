@@ -193,8 +193,8 @@ export default {
                                     <div class="col-4 col-md-2">
                                         <!-- <img :src="getImageUrl(dish.thumb)" class="img-fluid rounded-start" alt="Immagine piatto"
                                             style="width: 150px; height: 150px" /> -->
-                                            <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto"
-                                            style="width: 150px; height: 150px" />
+                                            <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto" style="width: 150px; height: 150px"  v-if="!dish.thumb.includes('post_images')"/>
+                                            <img :src="`${store.imageBaseUrl}/${dish.thumb}`" class="img-fluid rounded-start" alt="Immagine piatto" style="width: 150px; height: 150px" v-else/>
                                     </div>
                                     <!-- CARD DEL PIATTO -->
                                     <div class="col-8 col-md-10">
