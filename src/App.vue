@@ -1,23 +1,24 @@
 <script>
-  import AppHeader from './components/AppHeader.vue';
+import AppHeader from './components/AppHeader.vue';
 import ChatApp from './components/ChatApp.vue';
+import AppFooter from './components/AppFooter.vue';
 
 export default {
   components: {
     AppHeader,
-    ChatApp
+    ChatApp,
+    AppFooter,
   }
 }
 </script>
 
-<template >
+<template>
   <div>
-    <AppHeader/>
+    <AppHeader />
     <router-view></router-view>
+    <AppFooter />
   </div>
-  <ChatApp/>
+  <ChatApp />
 </template>
 
-<style lang="scss">
-  
-</style>
+<style lang="scss"></style>
