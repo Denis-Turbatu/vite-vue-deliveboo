@@ -12,5 +12,6 @@ export const store = reactive({
   thread_id: '',
   chat: [],
   mesUser: '',
-  chatIsOpen: false
+  chatIsOpen: false,
+  api_key: import.meta.env.VITE_API_KEY,
 });
