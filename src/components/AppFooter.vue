@@ -83,11 +83,11 @@ export default {
                         <!-- Gessica Calcagno -->
                         <li class="mb-3">
                             <p class="h6">Gessica Calcagno</p>
-                            <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.linkedin.com/in/gessica-cristina-calcagno-86286a318/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Gessica Calcagno">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-white"
+                            <a href="https://github.com/GessicaCalcagno" target="_blank" rel="noopener noreferrer" class="text-white"
                                 aria-label="GitHub Gessica Calcagno">
                                 <i class="fab fa-github"></i>
                             </a>
