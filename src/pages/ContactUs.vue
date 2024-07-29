@@ -55,8 +55,8 @@
                     <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 4">
                     <div class="card-body text-center">
                         <h5 class="card-title">Constantin Irina</h5>
-                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/renatoirina" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.linkedin.com/in/constantin-renato-irina/" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
