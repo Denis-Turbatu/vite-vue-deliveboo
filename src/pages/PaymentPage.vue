@@ -71,7 +71,7 @@
                             });
 
                             // localStorage.clear();
-                            this.$router.push({ name: "home" });
+                            this.$router.push({ name: "riepilogo" });
                         } else {
                             console.error(response.data);
                             document.getElementById('checkout-message').innerHTML = '<h1>Errore</h1><p>Controlla la console.</p>';
