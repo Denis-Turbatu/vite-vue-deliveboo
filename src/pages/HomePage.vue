@@ -84,9 +84,9 @@ export default {
       <div class="search-container">
         <input class="form-control me-2" type="text" id="search" name="search" @keyup.enter="searchAction()"
           v-model="query" placeholder="Cerca" aria-label="Search" />
-        <button class="btn btn-success" type="submit" @click="searchAction()">
+        <a href="#searchRestaurant" class="btn btn-success" type="submit" @click="searchAction()">
           Cerca
-        </button>
+        </a>
       </div>
     </div>
     <!-- /HERO SECTION -->
@@ -110,7 +110,7 @@ export default {
 
     <!-- RESTAURANTS SECTION -->
     <div class="container py-3">
-      <h4>Ristoranti:</h4>
+      <h4 id="searchRestaurant">Ristoranti:</h4>
       <div class="row">
         <div class="col-12 col-sm-6 col-md-4" v-for="restObj in store.restaurantsArray" :key="restObj.id">
           <AppCard :restaurantObject="restObj" />
