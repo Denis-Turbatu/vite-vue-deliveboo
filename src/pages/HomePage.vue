@@ -245,5 +245,50 @@ main {
   padding: 10px;
   border-radius: 5px;
   box-sizing: border-box;
+
+  @media (max-width: 950px) {
+    max-width: 60%;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  @media (max-width: 650px) {
+    max-width: 50%;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 80%;
+    padding: 4px;
+    gap: 4px;
+
+    input {
+      padding: 5px;
+      font-size: 0.875rem;
+    }
+
+    button {
+      padding: 5px;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    max-width: 90%;
+    padding: 2px;
+    gap: 2px;
+
+    input {
+      padding: 4px;
+      font-size: 0.75rem;
+    }
+
+    button {
+      padding: 4px;
+      font-size: 0.75rem;
+    }
+  }
 }
+
 </style>
