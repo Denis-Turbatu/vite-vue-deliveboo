@@ -82,7 +82,7 @@ export default {
 
                         <!-- Gessica Calcagno -->
                         <li class="mb-3">
-                            <p class="h6">Gessica Calcagno</p>
+                            <p class="h6">Gessica Cristina Calcagno</p>
                             <a href="https://www.linkedin.com/in/gessica-cristina-calcagno-86286a318/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Gessica Calcagno">
                                 <i class="fab fa-linkedin"></i>
