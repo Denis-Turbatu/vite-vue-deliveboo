@@ -18,16 +18,16 @@ export default {
                     <h3 class="mt-3 mb-4">Indirizzi azienda</h3>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <p class="h5">Indirizzo</p>
-                            <p>Via Monte Napoleone 8, 20121 Milano (MI), Italia</p>
+                            <p class="h6">Indirizzo</p>
+                            <p class="small">Via Monte Napoleone 8, 20121 Milano (MI), Italia</p>
                         </li>
                         <li class="mb-2">
-                            <p class="h5">Telefono</p>
-                            <p>+39 02 55501234</p>
+                            <p class="h6">Telefono</p>
+                            <p class="small">+39 02 55501234</p>
                         </li>
                         <li class="mb-2">
-                            <p class="h5">Email</p>
-                            <p><a href="mailto:info@deliveboo.it" class="text-white"
+                            <p class="h6">Email</p>
+                            <p class="small"><a href="mailto:info@deliveboo.it" class="text-white"
                                     aria-label="Email info@deliveboo.it">info@deliveboo.it</a></p>
                         </li>
                     </ul>
@@ -56,7 +56,7 @@ export default {
                     <ul class="list-unstyled">
                         <!-- Omar Ndiaye -->
                         <li class="mb-3">
-                            <p class="h5">Omar Ndiaye</p>
+                            <p class="h6">Omar Ndiaye</p>
                             <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Omar Ndiaye">
                                 <i class="fab fa-linkedin"></i>
@@ -69,7 +69,7 @@ export default {
 
                         <!-- Denis Turbatu -->
                         <li class="mb-3">
-                            <p class="h5">Denis Turbatu</p>
+                            <p class="h6">Denis Turbatu</p>
                             <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Denis Turbatu">
                                 <i class="fab fa-linkedin"></i>
@@ -82,7 +82,7 @@ export default {
 
                         <!-- Gessica Calcagno -->
                         <li class="mb-3">
-                            <p class="h5">Gessica Calcagno</p>
+                            <p class="h6">Gessica Calcagno</p>
                             <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Gessica Calcagno">
                                 <i class="fab fa-linkedin"></i>
@@ -95,7 +95,7 @@ export default {
 
                         <!-- Constantin Renato Irina -->
                         <li class="mb-3">
-                            <p class="h5">Constantin Renato Irina</p>
+                            <p class="h6">Constantin Renato Irina</p>
                             <a href="https://www.linkedin.com/in/constantin-renato-irina" target="_blank"
                                 rel="noopener noreferrer" class="text-white me-2"
                                 aria-label="LinkedIn Constantin Renato Irina">
@@ -109,7 +109,7 @@ export default {
 
                         <!-- Matteo Cenci -->
                         <li class="mb-3">
-                            <p class="h5">Matteo Cenci</p>
+                            <p class="h6">Matteo Cenci</p>
                             <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
                                 class="text-white me-2" aria-label="LinkedIn Matteo Cenci">
                                 <i class="fab fa-linkedin"></i>
@@ -140,6 +140,7 @@ export default {
 .app-footer {
     background-color: #343a40;
     color: #ffffff;
+    font-size: 1rem; /* Base font size */
 }
 
 .app-footer a {
@@ -154,8 +155,13 @@ export default {
     font-size: 1.5rem;
 }
 
-.app-footer .h5 {
+.app-footer .h6 {
+    font-size: 0.875rem; /* h6 font size */
     margin-bottom: 0.5rem;
+}
+
+.app-footer .small {
+    font-size: 0.75rem; /* Small text size */
 }
 
 .app-footer ul {
@@ -179,13 +185,13 @@ export default {
     }
 
     .app-footer .container {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .app-footer .col-md-4 {
         flex: 1 0 100%;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 }
 
@@ -195,8 +201,8 @@ export default {
     }
 
     .app-footer .container {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
 
     .app-footer i {
@@ -210,8 +216,8 @@ export default {
     }
 
     .app-footer .container {
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     .app-footer i {
