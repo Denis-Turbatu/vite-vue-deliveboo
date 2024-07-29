@@ -87,10 +87,9 @@ export default {
                     .filter((dish) => dish.quantity > 0);
 
                 console.log(updatedDishes);
-
+                this.store.cardNum = 0;
                 // per vedere il numeretto nel carrello
                 updatedDishes.forEach((curElemQuantity) => {
-                    this.store.cardNum = 0;
                     this.store.cardNum += curElemQuantity.quantity;
                 });
 

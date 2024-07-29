@@ -70,7 +70,7 @@
                                 products: productsData,
                             });
 
-                            localStorage.clear();
+                            // localStorage.clear();
                             this.$router.push({ name: "home" });
                         } else {
                             console.error(response.data);
@@ -92,11 +92,11 @@
 </script>
 
 <template>
-    <div class="container">
+    <div class="container vh-100">
         <div id="dropin-wrapper">
             <div id="checkout-message"></div>
             <div id="dropin-container"></div>
-            <button id="submit-button" @click="submitPayment">Submit payment</button>
+            <button id="submit-button" class="btn btn-success mb-5" @click="submitPayment">Procedi</button>
         </div>
     </div>
 </template>
