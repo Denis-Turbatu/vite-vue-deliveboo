@@ -37,11 +37,48 @@ export default {
   <div class="container pt-5">
     <h2 class="my-5">Ordine effettuato con successo!</h2>
 
-    <p>Mi raccomando tieni il telefono vicino a te! Il Rider sta arrivando!</p>
+    <p class="fw-bold">Mi raccomando tieni il telefono vicino a te! Il Rider sta arrivando!</p>
 
-    Qui inserire il riepologo dell'ordine
+    <!-- Qui inserire il riepologo dell'ordine -->
     <h4>Riepilogo Ordine!</h4>
-    <p>{{ this.user }}</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4 p-3">
+            <div class="flex-grow-1">
+              <div class="info border border-1 my-2 w-100 rounded p-3 d-flex flex-column flex-md-row align-items-center">
+                
+                <div class="flex-grow-1 d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <section class="ms-2 text-center text-md-start">
+                    <h6 class="fw-semibold mt-2 mb-2">Nome</h6>
+                    <p class="m-0">{{ user.name }}</p>
+                  </section>
+                </div>
+                <div class="flex-grow-1 d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <section class="ms-2 text-center text-md-start">
+                    <h6 class="fw-semibold mt-2 mb-2">Cognome</h6>
+                    <p class="m-0">{{ user.surname }}</p>
+                  </section>
+                </div>
+                <div class="flex-grow-1 d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <section class="ms-2 text-center text-md-start">
+                    <h6 class="fw-semibold mt-2 mb-2">Indirizzo</h6>
+                    <p class="m-0">{{ user.address }}</p>
+                  </section>
+                </div>
+                <div class="flex-grow-1 d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <section class="ms-2 text-center text-md-start">
+                    <h6 class="fw-semibold mt-2 mb-2">Telefono</h6>
+                    <p class="m-0">{{ user.phone }}</p>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -63,9 +100,9 @@ export default {
           </div>
         </div>
         <div class="col-12 d-flex justify-content-between flex-wrap">
-          <router-link :to="{ name: 'home' }" class="btn btn-success ms-3 mb-2"
+          <router-link :to="{ name: 'home' }" class="btn btn-success ms-3 mb-2 mt-2"
             @click="saveProductsData()">Torna alla Home</router-link>
-          <h3 class="mb-2">
+          <h3 class="mb-2 mt-2">
             Totale: <span>{{ getOrderPrice() }}</span>€
           </h3>
         </div>
@@ -77,3 +114,7 @@ export default {
 
   </div>
 </template>
+
+<style scoped lang="scss">
+
+</style>
