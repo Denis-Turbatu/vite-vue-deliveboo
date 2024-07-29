@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-6 mb-4">
                 <div class="card me-3" style="width: 20rem;">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 5">
+                    <img src="../assets/img/matteo.jpg" class="card-img-top" alt="Image 5">
                     <div class="card-body text-center">
                         <h5 class="card-title">Matteo Cenci</h5>
                         <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
