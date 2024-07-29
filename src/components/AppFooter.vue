@@ -12,19 +12,10 @@ export default {
 <template>
     <footer class="app-footer bg-dark text-white py-4">
         <div class="container">
-            <div class="text-center mb-4">
-                <p class="mb-2">&copy; {{ currentYear }} DeliveBoo. Tutti i diritti riservati.</p>
-                <p class="mb-1">DeliveBoo S.r.l.</p>
-                <p class="mb-0">
-                    <a href="/privacy-policy" class="text-white" aria-label="Privacy Policy">Privacy Policy</a> |
-                    <a href="/terms-of-service" class="text-white" aria-label="Termini di servizio">Termini di
-                        servizio</a>
-                </p>
-            </div>
             <div class="row">
                 <!-- Lista Indirizzi -->
                 <div class="col-md-4">
-                    <h3 class="mt-3 mb-4">Indirizzi</h3>
+                    <h3 class="mt-3 mb-4">Indirizzi azienda</h3>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <p class="h5">Indirizzo</p>
@@ -70,8 +61,8 @@ export default {
                                 class="text-white me-2" aria-label="LinkedIn Omar Ndiaye">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
-                                class="text-white" aria-label="GitHub Omar Ndiaye">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-white"
+                                aria-label="GitHub Omar Ndiaye">
                                 <i class="fab fa-github"></i>
                             </a>
                         </li>
@@ -79,12 +70,12 @@ export default {
                         <!-- Denis Turbatu -->
                         <li class="mb-3">
                             <p class="h5">Denis Turbatu</p>
-                            <a href="https://www.linkedin.com/in/" target="_blank"
-                                rel="noopener noreferrer" class="text-white me-2" aria-label="LinkedIn Denis Turbatu">
+                            <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
+                                class="text-white me-2" aria-label="LinkedIn Denis Turbatu">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
-                                class="text-white" aria-label="GitHub Denis Turbatu">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-white"
+                                aria-label="GitHub Denis Turbatu">
                                 <i class="fab fa-github"></i>
                             </a>
                         </li>
@@ -92,13 +83,12 @@ export default {
                         <!-- Gessica Calcagno -->
                         <li class="mb-3">
                             <p class="h5">Gessica Calcagno</p>
-                            <a href="https://www.linkedin.com/in/" target="_blank"
-                                rel="noopener noreferrer" class="text-white me-2"
-                                aria-label="LinkedIn Gessica Calcagno">
+                            <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer"
+                                class="text-white me-2" aria-label="LinkedIn Gessica Calcagno">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
-                                class="text-white" aria-label="GitHub Gessica Calcagno">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-white"
+                                aria-label="GitHub Gessica Calcagno">
                                 <i class="fab fa-github"></i>
                             </a>
                         </li>
@@ -124,12 +114,22 @@ export default {
                                 class="text-white me-2" aria-label="LinkedIn Matteo Cenci">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
-                                class="text-white" aria-label="GitHub Matteo Cenci">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-white"
+                                aria-label="GitHub Matteo Cenci">
                                 <i class="fab fa-github"></i>
                             </a>
                         </li>
                     </ul>
+                </div>
+                <!-- Privacy -->
+                <div class="text-center mb-4">
+                    <p class="mb-2">&copy; {{ currentYear }} DeliveBoo. Tutti i diritti riservati.</p>
+                    <p class="mb-1">DeliveBoo S.r.l.</p>
+                    <p class="mb-0">
+                        <a href="/privacy-policy" class="text-white" aria-label="Privacy Policy">Privacy Policy</a> |
+                        <a href="/terms-of-service" class="text-white" aria-label="Termini di servizio">Termini di
+                            servizio</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -171,5 +171,55 @@ export default {
 
 .app-footer .list-unstyled {
     margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .app-footer {
+        font-size: 0.9rem;
+    }
+
+    .app-footer .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .app-footer .col-md-4 {
+        flex: 1 0 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .app-footer {
+        font-size: 0.8rem;
+    }
+
+    .app-footer .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .app-footer i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .app-footer {
+        font-size: 0.7rem;
+    }
+
+    .app-footer .container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .app-footer i {
+        font-size: 1rem;
+    }
+
+    .app-footer .text-center {
+        text-align: left;
+    }
 }
 </style>
