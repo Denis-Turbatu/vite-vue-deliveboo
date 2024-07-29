@@ -135,7 +135,7 @@ export default {
     </div>
   </div>
   <div v-else>
-    <div class="container">
+    <div class="container vh-100">
       <h1 class="mb-4">Oops! Il tuo carrello è vuoto, ma il tuo stomaco non deve esserlo!</h1>
       <span>Riempi il carrello con amore!</span>
       <router-link :to="{ name: 'home' }" class="btn btn-success ms-3">Home</router-link>
