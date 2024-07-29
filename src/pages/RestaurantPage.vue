@@ -182,8 +182,10 @@ export default {
                     <!-- IMMAGINE DEL RISTORANTE -->
                     <div class="col-12 col-lg-4 mb-5">
                         <!-- <p>{{ restaurant.post_images }}</p> -->
-                        <img class="img-fluid rounded shadow" :src="restaurant.image" alt="Immagine ristorante" v-if="!restaurant.image.includes('post_images')"/>
-                        <img class="img-fluid rounded shadow" :src="`${store.imageBaseUrl}/${restaurant.image}`" alt="Immagine ristorante" v-else/>
+                        <img class="img-fluid rounded shadow" :src="restaurant.image" alt="Immagine ristorante"
+                            v-if="!restaurant.image.includes('post_images')" />
+                        <img class="img-fluid rounded shadow" :src="`${store.imageBaseUrl}/${restaurant.image}`"
+                            alt="Immagine ristorante" v-else />
                     </div>
                     <div class="col-12 col-lg-8" style="height: 500px; overflow-y: auto">
                         <form>
@@ -193,8 +195,12 @@ export default {
                                     <div class="col-4 col-md-2">
                                         <!-- <img :src="getImageUrl(dish.thumb)" class="img-fluid rounded-start" alt="Immagine piatto"
                                             style="width: 150px; height: 150px" /> -->
-                                            <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto" style="width: 150px; height: 150px"  v-if="!dish.thumb.includes('post_images')"/>
-                                            <img :src="`${store.imageBaseUrl}/${dish.thumb}`" class="img-fluid rounded-start" alt="Immagine piatto" style="width: 150px; height: 150px" v-else/>
+                                        <img :src="dish.thumb" class="img-fluid rounded-start" alt="Immagine piatto"
+                                            style="width: 150px; height: 150px"
+                                            v-if="!dish.thumb.includes('post_images')" />
+                                        <img :src="`${store.imageBaseUrl}/${dish.thumb}`"
+                                            class="img-fluid rounded-start" alt="Immagine piatto"
+                                            style="width: 150px; height: 150px" v-else />
                                     </div>
                                     <!-- CARD DEL PIATTO -->
                                     <div class="col-8 col-md-10">
@@ -222,17 +228,11 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                            <!-- <span class="d-flex justify-content-between">
-                                <input type="number" min="0" class="ms-cart-prod"
-                                    v-model.number="dishQuantities[index]" />
-                            </span> -->
-
-                            <!-- <button type="submit" class="btn btn-success" @click.prevent="goToCartPage">Vai al
-                                carrello</button> -->
-                            <button type="submit" class="btn btn-success mt-3 ms-auto d-block"
+                            <!-- "VAI AL CARRELLO" SPOSTATO FUORI -->
+                            <!-- <button type="submit" class="btn btn-success mt-3 ms-auto d-block"
                                 @click.prevent="goToCartPage">
                                 Vai al carrello
-                            </button>
+                            </button> -->
                         </form>
 
                         <!-- Modal -->
@@ -264,6 +264,9 @@ export default {
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-success mt-3 ms-auto d-block" @click.prevent="goToCartPage">
+                        Vai al carrello
+                    </button>
                 </div>
             </div>
         </div>
