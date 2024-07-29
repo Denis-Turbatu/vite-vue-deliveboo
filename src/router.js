@@ -53,6 +53,12 @@ const router = createRouter({
       props: true
     },
     {
+      path: "/riepilogo",
+      name: "riepilogo",
+      component: ThankYouPage,
+      props: true
+    },
+    {
       //qualsiasi rotta tranne quelli specificati sopra
       path: "/:pathMatch(.*)*",
       name: "not-found",
