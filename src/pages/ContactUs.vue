@@ -55,7 +55,7 @@
             <!-- Third Row - 2 cards -->
             <div class="col-md-6 mb-4">
                 <div class="card me-3" style="width: 20rem;"> 
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 4">
+                    <img src="../assets/img/constantin.jpg" class="card-img-top" alt="Image 4">
                     <div class="card-body text-center">
                         <h5 class="card-title">Constantin Irina</h5>
                         <a href="https://github.com/renatoirina" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
