@@ -126,7 +126,7 @@ export default {
           </div>
         </div>
         <div class="col-12 d-flex justify-content-between flex-wrap">
-          <router-link :to="{ name: 'spedizione' }" class="btn btn-success ms-3 mb-2" @click="saveProductsData()">Procedi all'ordine</router-link>
+          <router-link :to="{ name: 'spedizione' }" class="btn btn-success mb-2" @click="saveProductsData()">Procedi all'ordine</router-link>
           <h3 class="mb-2">
             Totale: <span>{{ getOrderPrice() }}</span>€
           </h3>
