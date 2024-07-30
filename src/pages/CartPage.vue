@@ -145,7 +145,7 @@ export default {
 
 <style scoped lang="scss">
 .ms-cart-prod {
-  border: solid 2px orange;
+  border: solid 2px #ffc107;
   padding: 5px 6px;
   margin-inline: 5px;
   width: 70px;

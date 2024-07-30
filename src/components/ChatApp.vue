@@ -291,7 +291,7 @@ export default {
 
       border-radius: 5px;
 
-      background: rgb(196, 239, 135);
+      background: #ffc107;
     }
 
     .ball {
@@ -343,7 +343,7 @@ export default {
 
 
     .received {
-      background-color: rgb(196, 239, 135);
+      background-color: #ffc107;
       padding: 10px;
       border-radius: 10px;
       padding-bottom: 30px;
