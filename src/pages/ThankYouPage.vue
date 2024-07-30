@@ -28,6 +28,9 @@ export default {
 
       return totalPrice.toFixed(2);
     },
+    clear(){
+      localStorage.clear();
+    }
   }
 };
 
@@ -101,7 +104,7 @@ export default {
         </div>
         <div class="col-12 d-flex justify-content-between flex-wrap">
           <router-link :to="{ name: 'home' }" class="btn btn-success ms-3 mb-2 mt-2"
-            @click="localStorage.clear()">Torna alla Home</router-link>
+            @click="clear()">Torna alla Home</router-link>
           <h3 class="mb-2 mt-2">
             Totale: <span>{{ getOrderPrice() }}</span>€
           </h3>

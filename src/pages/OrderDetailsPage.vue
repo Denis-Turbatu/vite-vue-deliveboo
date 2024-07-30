@@ -55,11 +55,11 @@
                 </div>
 
                 <div class="mb-3 w-50 p-2">
-                    <label for="surname" class="form-label fw-semibold">Cognome</label>
+                    <label for="surname" class="form-label fw-semibold">Cognome <span class="text-danger">*</span></label>
                     <input v-model="userData.surname" type="text" class="form-control" id="surname" name="surname"
                         required>
                 </div>
-            </div>
+            </div>  
 
             <div class="mb-3 p-2">
                 <label for="address" class="form-label fw-semibold">Indirizzo <span class="text-danger">*</span></label>
