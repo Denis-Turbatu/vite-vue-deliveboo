@@ -149,6 +149,8 @@ export default {
         this.isCompleted = false;
         this.isLoading = false;
 
+        // Scroll to the bottom of the chat
+        this.scrollToBottom();
 
       } catch (error) {
         console.error('Errore in getMessages()', error);
@@ -190,9 +192,21 @@ export default {
 
       this.mesPrint.push(newMesSend);
 
+      // Scroll to the bottom of the chat
+      this.scrollToBottom();
+
     },
     togglechatIsOpen() {
       this.store.chatIsOpen = !this.store.chatIsOpen;
+    },
+    scrollToBottom() {
+      this.$nextTick(() => {
+        const chatContainer = this.$el.querySelector('main');
+        chatContainer.scroll({
+          top: chatContainer.scrollHeight,
+          behavior: 'smooth'
+        });
+      });
     }
   }
 }
@@ -246,7 +260,6 @@ export default {
   right: 20px;
   bottom: 20px;
   z-index: 10;
-
 }
 
 #chat {
@@ -258,6 +271,7 @@ export default {
   right: 20px;
   bottom: 20px;
   z-index: 10;
+  overflow: hidden;
 
   header {
     height: 10%;
@@ -271,90 +285,86 @@ export default {
     height: 80%;
     overflow-y: scroll;
     padding-bottom: 10px;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* edge */
+  }
 
-    p {
-      margin-bottom: 0;
-      position: relative;
+  main::-webkit-scrollbar {
+    display: none; /* chrome */
+  }
 
-      span {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-        color: grey;
-      }
+  p {
+    margin-bottom: 0;
+    position: relative;
+
+    span {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      color: grey;
+    }
+  }
+
+  #fake-writing {
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    background: #ffc107;
+  }
+
+  .ball {
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: black;
+  }
+
+  .ball-1 {
+    animation: ball1 0.6s ease-in-out infinite;
+    animation-delay: 0.2s;
+  }
+
+  .ball-2 {
+    animation: ball1 0.6s ease-in-out infinite;
+    animation-delay: 0.3s;
+  }
+
+  .ball-3 {
+    animation: ball1 0.6s ease-in-out infinite;
+    animation-delay: 0.4s;
+  }
+
+  .ball-4 {
+    animation: ball1 0.6s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes ball1 {
+    0% {
+      transform: translateY(0px);
     }
 
-    #fake-writing {
-      width: 100px;
-      height: 40px;
-      padding: 5px;
-
-      border-radius: 5px;
-
-      background: #ffc107;
+    100% {
+      transform: translateY(-10px);
     }
+  }
 
-    .ball {
-      float: left;
-      margin-top: 20px;
-      margin-left: 10px;
+  .received {
+    background-color: #ffc107;
+    padding: 10px;
+    border-radius: 10px;
+    padding-bottom: 30px;
+  }
 
-      width: 10px;
-      height: 10px;
-
-      border-radius: 10px;
-      background: black;
-
-      //  transform: translateY(-5px);
-
-    }
-
-    .ball-1 {
-      animation: ball1 0.6s ease-in-out infinite;
-      animation-delay: 0.2s;
-    }
-
-    .ball-2 {
-      animation: ball1 0.6s ease-in-out infinite;
-      animation-delay: 0.3s
-    }
-
-    .ball-3 {
-      animation: ball1 0.6s ease-in-out infinite;
-      animation-delay: 0.4s
-    }
-
-    .ball-4 {
-      animation: ball1 0.6s ease-in-out infinite;
-      animation-delay: 0.5s
-    }
-
-    @keyframes ball1 {
-      0% {
-        transform: translateY(0px);
-      }
-
-      100% {
-        transform: translateY(-10px);
-      }
-
-      //100% {transform: translateY(0px);}
-    }
-
-
-    .received {
-      background-color: #ffc107;
-      padding: 10px;
-      border-radius: 10px;
-      padding-bottom: 30px;
-    }
-
-    .send {
-      background-color: rgb(255, 255, 255);
-      padding: 10px;
-      border-radius: 10px;
-      padding-bottom: 30px;
-    }
+  .send {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    padding-bottom: 30px;
   }
 
   footer {
