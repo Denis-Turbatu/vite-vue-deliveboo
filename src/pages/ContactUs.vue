@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6 mb-4" >
                 <div class="card me-3" style="width: 20rem;">
-                    <img src="../assets/img/denis.png" class="card-img-top" alt="Image 2">
+                    <img src="../assets/img/denis.png" class="card-img-top" id="denis" alt="Image 2">
                     <div class="card-body text-center">
                         <h5 class="card-title">Denis Turbatu</h5>
                         <a href="https://github.com/Denis-Turbatu" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
@@ -85,5 +85,10 @@
 
 .card{
 border-color: green;
+}
+
+#denis{
+    height: 372px;
+    object-fit: cover;
 }
 </style>
