@@ -314,6 +314,7 @@ color:  #ffc107;
     padding: 5px;
     border-radius: 5px;
     background: #ffc107;
+    border-radius: 10px;
   }
 
   .ball {
