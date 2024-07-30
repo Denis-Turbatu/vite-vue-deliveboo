@@ -254,6 +254,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.fa-comment::before{
+color:  #ffc107;
+}
 #chat-icon {
   font-size: 2rem;
   position: fixed;
