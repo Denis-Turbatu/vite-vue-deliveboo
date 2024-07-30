@@ -19,11 +19,11 @@
             <!-- First Row - 2 cards -->
             <div class="col-md-6 mb-4" >
                 <div class="card me-3" style="width: 20rem;">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Image 1">
+                    <img src="../assets/img/omar.png" class="card-img-top" alt="Image 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">Omar Ndiaye</h5>
-                        <a href="https://github.com" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/OmarThierno" target="_blank" class="btn btn-dark m-1"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.linkedin.com/in/omar-thierno-b2413a1b5/" target="_blank" class="btn btn-primary m-1"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
